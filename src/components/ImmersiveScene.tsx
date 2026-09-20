@@ -1,4 +1,3 @@
-import { ContactShadows, Html } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -115,13 +114,6 @@ function ShowroomModule({ project, index, selected, onSelect }: { project: Proje
         <octahedronGeometry args={[0.11, 0]} />
         <meshBasicMaterial color={project.accent} />
       </mesh>
-      <Html position={[0, -0.38, 0.1]} center distanceFactor={7}>
-        <button className={`showroom-label ${selected ? 'is-selected' : ''}`} type="button" onClick={() => onSelect?.(project.slug)}>
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <b>{project.name}</b>
-          <em>{project.status}</em>
-        </button>
-      </Html>
     </group>
   );
 }
@@ -135,7 +127,6 @@ function Scene({ mode = 'hero', projects = [], selectedProject, onSelect, finish
       <directionalLight position={[-4, 2, 2]} intensity={1.1} color="#9aa9b6" />
       <pointLight position={[1, 2, 3]} intensity={2} distance={8} color="#d6b27a" />
       <Sculpture mode={mode} finish={finish} />
-      <ContactShadows position={[0, -1.24, 0]} opacity={0.34} scale={5} blur={2.2} far={4} />
       {mode === 'showroom' && (
         <>
           {projects.map((project, index) => <ShowroomModule key={project.slug} project={project} index={index} selected={selectedProject === project.slug} onSelect={onSelect} />)}
