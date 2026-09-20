@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SceneIsland from '../components/SceneIsland';
+import HeroObject from '../components/HeroObject';
 import ProjectExplorer from '../components/ProjectExplorer';
 import { featuredProjects, projects } from '../data/projects';
 ---
@@ -15,10 +16,10 @@ import { featuredProjects, projects } from '../data/projects';
         <div class="hero-signal"><span>Currently</span><strong>Building quietly.<br />Shipping deliberately.</strong></div>
       </div>
       <div class="hero-scene reveal-on-scroll" aria-label="Interactive 3D Aman Sharma sculpture">
-        <div class="scene-shell scene-shell--hero"><div class="scene-corner scene-corner--tl">AM / 001</div><div class="scene-corner scene-corner--br">DRAG YOUR VIEW</div><SceneIsland client:only="react" mode="hero" /><div class="scene-caption"><span>THE BUILDER'S OBJECT</span><b>01 / 04</b></div></div>
+        <div class="scene-shell scene-shell--hero"><div class="scene-corner scene-corner--tl">AM / 001</div><HeroObject client:only="react" /><div class="scene-caption"><span>THE BUILDER'S OBJECT</span><b>01 / 04</b></div></div>
       </div>
     </div>
-    <div class="hero-marquee" aria-hidden="true"><div>PRODUCT THINKING <span>✳</span> MOBILE CRAFT <span>✳</span> DIGITAL SYSTEMS <span>✳</span> PRODUCT THINKING <span>✳</span> MOBILE CRAFT <span>✳</span> DIGITAL SYSTEMS <span>✳</span></div></div>
+    <div class="shell hero-specbar" aria-label="Portfolio focus"><span>Studio note <b>01</b></span><span>Product / mobile / web</span><span>Build with intent</span></div>
   </section>
 
   <section id="work" class="section work-section section-grid" aria-labelledby="work-title">
