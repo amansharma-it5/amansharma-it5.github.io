@@ -67,7 +67,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
         <div><a href="https://github.com/amansharma-it5" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/amansharmanm/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:amansharma.i5@gmail.com">Email ↗</a></div>
       </div>
     </footer>
-    <ScrollDirector client:idle />
+    <ScrollDirector client:load />
     <script>
       const menuButton = document.querySelector('.menu-toggle');
       const navigation = document.querySelector('#site-navigation');
