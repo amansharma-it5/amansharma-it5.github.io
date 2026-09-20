@@ -20,3 +20,8 @@ Static GitHub Pages portfolio for `amansharma-it5`, built with plain HTML, CSS a
 4. Run the local checks in `docs/DEPLOYMENT.md`, then commit and push to `main`.
 
 Private repositories should remain described without publishing private URLs or source files. Only include a live demo or GitHub button when the destination is verified.
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/amansharmanm/
+- Email: amansharma.i5@gmail.com

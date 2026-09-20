@@ -15,7 +15,12 @@ This inventory was assembled from the authenticated `amansharma-it5` GitHub acco
 
 ## Not included as a verified project
 
-No accessible repository, README or public project documentation verified **Agilocity Staffing** or **Vanshara Global Solutions** during this inventory. They are intentionally not presented as employment or client claims. A public LinkedIn profile and public email were also not available for safe publication, so the contact area only links to GitHub.
+No accessible repository, README or public project documentation verified **Agilocity Staffing** or **Vanshara Global Solutions** during this inventory. They are intentionally not presented as employment or client claims. The owner has now explicitly provided a public LinkedIn URL and email for publication. LinkedIn’s profile content was not machine-readable during this update, so no additional employment, education or certification claims were imported from it.
+
+Published contact details:
+
+- LinkedIn: https://www.linkedin.com/in/amansharmanm/
+- Email: amansharma.i5@gmail.com
 
 ## Privacy boundary
 

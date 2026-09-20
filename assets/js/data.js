@@ -1,6 +1,8 @@
 window.PORTFOLIO_CONFIG = {
   baseUrl: 'https://amansharma-it5.github.io',
   github: 'https://github.com/amansharma-it5',
+  linkedin: 'https://www.linkedin.com/in/amansharmanm/',
+  email: 'amansharma.i5@gmail.com',
   categories: [
     { id: 'all', label: 'All work' },
     { id: 'android', label: 'Android apps' },
