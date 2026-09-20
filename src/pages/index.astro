@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SceneIsland from '../components/SceneIsland';
+import ProjectExplorer from '../components/ProjectExplorer';
+import { featuredProjects, projects } from '../data/projects';
+---
+<BaseLayout>
+  <section class="hero section-grid" aria-labelledby="hero-title">
+    <div class="shell hero__grid">
+      <div class="hero-copy reveal-on-scroll">
+        <p class="eyebrow"><span>01</span> Independent product builder / India</p>
+        <h1 id="hero-title">Ideas in.<br /><em>Products out.</em></h1>
+        <p class="hero-lede">I’m Aman — I design and build useful digital products where clear systems meet a little bit of wonder.</p>
+        <div class="hero-actions"><a class="button button--primary" href="#work">Explore the work <span>↘</span></a><a class="text-link" href="mailto:amansharma.i5@gmail.com">Start a conversation <span>↗</span></a></div>
+        <div class="hero-signal"><span>Currently</span><strong>Building quietly.<br />Shipping deliberately.</strong></div>
+      </div>
+      <div class="hero-scene reveal-on-scroll" aria-label="Interactive 3D Aman Sharma sculpture">
+        <div class="scene-shell scene-shell--hero"><div class="scene-corner scene-corner--tl">AM / 001</div><div class="scene-corner scene-corner--br">DRAG YOUR VIEW</div><SceneIsland client:only="react" mode="hero" /><div class="scene-caption"><span>THE BUILDER'S OBJECT</span><b>01 / 04</b></div></div>
+      </div>
+    </div>
+    <div class="hero-marquee" aria-hidden="true"><div>PRODUCT THINKING <span>✳</span> MOBILE CRAFT <span>✳</span> DIGITAL SYSTEMS <span>✳</span> PRODUCT THINKING <span>✳</span> MOBILE CRAFT <span>✳</span> DIGITAL SYSTEMS <span>✳</span></div></div>
+  </section>
+
+  <section id="work" class="section work-section section-grid" aria-labelledby="work-title">
+    <div class="shell">
+      <div class="section-heading reveal-on-scroll"><div><p class="eyebrow"><span>02</span> Selected work</p><h2 id="work-title">Small studio,<br /><em>wide surface area.</em></h2></div><p class="section-intro">From offline-first Android tools to live web utilities, every build starts with a real constraint and ends with a surface someone can use.</p></div>
+      <ProjectExplorer compact client:load />
+      <div class="section-cta"><a class="arrow-link" href="/projects/">Open the full project archive <span>↗</span></a><span>{projects.length.toString().padStart(2, '0')} documented projects</span></div>
+    </div>
+  </section>
+
+  <section class="showroom-section section-grid" aria-labelledby="showroom-title">
+    <div class="shell">
+      <div class="section-heading section-heading--tight reveal-on-scroll"><div><p class="eyebrow"><span>03</span> The showroom</p><h2 id="showroom-title">Tap into<br /><em>the build room.</em></h2></div><p class="section-intro">A little navigable model of the archive. Select a plinth to jump into the thinking behind each product.</p></div>
+      <div class="showroom-layout">
+        <div class="scene-shell scene-shell--showroom reveal-on-scroll"><SceneIsland client:only="react" mode="showroom" projects={featuredProjects} /><div class="showroom-grid-label">FOUR SIGNALS / ONE PRACTICE</div></div>
+        <div class="showroom-notes reveal-on-scroll"><div class="showroom-note"><span>01</span><strong>Useful before impressive.</strong><p>Every interaction earns its place by making the product clearer, calmer or more capable.</p></div><div class="showroom-note"><span>02</span><strong>Boundaries are features.</strong><p>Private repos stay private. Unconfigured payments stay off. Honest product states build trust.</p></div><div class="showroom-note"><span>03</span><strong>Systems create room.</strong><p>Good architecture is what lets a small team move with confidence once the surface gets complex.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section section-grid" aria-labelledby="about-title">
+    <div class="shell about-grid"><div class="about-statement reveal-on-scroll"><p class="eyebrow"><span>04</span> The practice</p><h2 id="about-title">I like the space<br />between <em>logic</em><br />and feeling.</h2></div><div class="about-copy reveal-on-scroll"><p class="large-copy">I’m a product-minded developer who enjoys taking ambiguous ideas and giving them a useful shape — a trustworthy flow, a considered detail, a real shipped surface.</p><div class="principles"><div><span>01</span><strong>Make it legible.</strong><p>Complex systems should feel calm in the hand.</p></div><div><span>02</span><strong>Respect the edge cases.</strong><p>Constraints are where the product reveals itself.</p></div><div><span>03</span><strong>Ship the honest version.</strong><p>A clear “not yet” beats a polished fiction.</p></div></div></div></div>
+  </section>
+
+  <section id="labs" class="archive-section section-grid" aria-labelledby="labs-title">
+    <div class="shell"><div class="section-heading reveal-on-scroll"><div><p class="eyebrow"><span>05</span> Open archive</p><h2 id="labs-title">Experiments,<br /><em>practice, proof.</em></h2></div><p class="section-intro">A visible trail of learning work — deliberately smaller, still worth looking at.</p></div><ProjectExplorer compact initialFilter="experiments" client:load /></div>
+  </section>
+
+  <section id="contact" class="contact-section section-grid" aria-labelledby="contact-title">
+    <div class="shell contact-card reveal-on-scroll"><div><p class="eyebrow"><span>06</span> Your move</p><h2 id="contact-title">Have a good<br /><em>problem?</em></h2></div><div class="contact-card__right"><p>Tell me what you’re trying to make, untangle or bring back to life. I’ll bring curiosity, structure and a bias toward shipping.</p><a class="contact-email" href="mailto:amansharma.i5@gmail.com">amansharma.i5@gmail.com <span>↗</span></a><div class="contact-links"><a href="https://www.linkedin.com/in/amansharmanm/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/amansharma-it5" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></div>
+  </section>
+</BaseLayout>
