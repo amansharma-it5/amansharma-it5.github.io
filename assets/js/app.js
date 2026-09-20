@@ -18,7 +18,7 @@
   function link(url, label, kind) {
     if (!url) return '';
     const icon = kind === 'github' ? icons.github : icons.external;
-    return `<a class="button button--ghost button--small" href="${esc(url)}" target="_blank" rel="noreferrer">${icon}<span>${esc(label)}</span></a>`;
+    return `<a class="button button--ghost button--small" href="${esc(url)}" target="_blank" rel="noreferrer" aria-label="${esc(label)}" title="${esc(label)}">${icon}<span>${esc(label)}</span></a>`;
   }
 
   function visual(project, large) {
