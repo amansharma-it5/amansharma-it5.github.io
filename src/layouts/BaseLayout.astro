@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import ScrollDirector from '../components/ScrollDirector';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Aman Sharma — Product builder & creative technologist',
+  description = 'Aman Sharma builds thoughtful Android products, useful web tools and expressive interfaces from first principle to shipped surface.',
+  image = '/assets/images/social-card.svg'
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#06101d" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Aman Sharma',
+      url: 'https://amansharma-it5.github.io',
+      email: 'mailto:amansharma.i5@gmail.com',
+      sameAs: ['https://www.linkedin.com/in/amansharmanm/', 'https://github.com/amansharma-it5']
+    })} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="wordmark" href="/" aria-label="Aman Sharma home"><span>AS</span><em>AMAN SHARMA</em></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="sr-only">Toggle navigation</span><i /><i /></button>
+        <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
+          <a href="/#work">Work <span>01</span></a>
+          <a href="/#about">About <span>02</span></a>
+          <a href="/#labs">Archive <span>03</span></a>
+          <a href="/#contact">Contact <span>04</span></a>
+        </nav>
+        <a class="header-status" href="mailto:amansharma.i5@gmail.com"><i />Open to thoughtful work</a>
+      </div>
+    </header>
+    <main id="main-content"><slot /></main>
+    <footer class="site-footer">
+      <div class="shell site-footer__inner">
+        <p>© {new Date().getFullYear()} Aman Sharma. Built with curiosity.</p>
+        <div><a href="https://github.com/amansharma-it5" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/amansharmanm/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:amansharma.i5@gmail.com">Email ↗</a></div>
+      </div>
+    </footer>
+    <ScrollDirector client:idle />
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const navigation = document.querySelector('#site-navigation');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!open));
+        navigation?.classList.toggle('is-open', !open);
+      });
+      navigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        menuButton?.setAttribute('aria-expanded', 'false');
+        navigation?.classList.remove('is-open');
+      }));
+    </script>
+  </body>
+</html>

@@ -1,16 +1,25 @@
 # Deployment and maintenance
 
-The repository is configured for GitHub Pages from `main` / root. There is no build step, package manager or backend.
+The repository builds as a static Astro site and deploys through `.github/workflows/deploy.yml` using the GitHub Pages artifact workflow. GitHub Pages remains the only hosting provider.
 
 ## Local preview
 
 From the repository root:
 
 ```powershell
-python -m http.server 4173
+npm install
+npm run dev
 ```
 
-Open `http://127.0.0.1:4173/` and check the homepage, project archive, filters, search, mobile menu and case-study links.
+Open `http://127.0.0.1:4321/` and check the homepage, project archive, filters, search, mobile menu, case-study links and WebGL fallback.
+
+The production checks are:
+
+```powershell
+npm run check
+npm run build
+npm test
+```
 
 ## GitHub Pages
 
@@ -21,8 +30,8 @@ gh api repos/amansharma-it5/amansharma-it5.github.io/pages
 Invoke-WebRequest -Uri https://amansharma-it5.github.io/ -UseBasicParsing
 ```
 
-If Pages is not enabled by the API, open the repository on GitHub and choose **Settings → Pages → Deploy from a branch → main → /(root) → Save**.
+If the workflow cannot deploy, open the repository on GitHub and choose **Settings → Pages**, then set the build and deployment source to **GitHub Actions**. The workflow needs `pages: write` and `id-token: write` permissions.
 
 ## Quality checks
 
-The portfolio uses no third-party runtime dependencies. Validate HTML structure with an available browser or HTML checker, run the static link scan, and use a browser at 375px, 768px, 1024px and 1440px widths. Performance and Lighthouse results should only be reported after measuring them.
+The portfolio uses a deferred WebGL island with a reduced-motion / low-memory DOM fallback. Use a browser at mobile and desktop widths, verify the archive search and filters, and inspect the browser console for errors. Performance and Lighthouse results should only be reported after measuring them.
