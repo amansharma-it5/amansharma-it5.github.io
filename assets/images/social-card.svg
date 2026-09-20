@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse"><stop stop-color="#07111F"/><stop offset="1" stop-color="#122B48"/></linearGradient><radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(932 104) rotate(135) scale(448 456)" gradientUnits="userSpaceOnUse"><stop stop-color="#5392FF" stop-opacity=".45"/><stop offset="1" stop-color="#5392FF" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/><rect width="1200" height="630" rx="36" fill="url(#glow)"/>
+  <path d="M0 108h1200M0 210h1200M0 312h1200M0 414h1200M0 516h1200M108 0v630M210 0v630M312 0v630M414 0v630M516 0v630M618 0v630M720 0v630M822 0v630M924 0v630M1026 0v630M1128 0v630" stroke="#75E6FF" stroke-opacity=".06"/>
+  <circle cx="1010" cy="308" r="142" stroke="#75E6FF" stroke-opacity=".36"/><circle cx="1010" cy="308" r="94" stroke="#9E88FF" stroke-opacity=".38"/><circle cx="1010" cy="308" r="45" fill="#75E6FF" fill-opacity=".12" stroke="#75E6FF" stroke-opacity=".65"/>
+  <text x="90" y="137" fill="#75E6FF" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="5">AMAN LABS / PORTFOLIO</text>
+  <text x="86" y="278" fill="#EFF7FF" font-family="Arial, sans-serif" font-size="92" font-weight="700">Aman Sharma</text>
+  <text x="91" y="346" fill="#A9BDD0" font-family="Arial, sans-serif" font-size="31">I turn ideas into products.</text>
+  <text x="91" y="526" fill="#8EA4B9" font-family="Arial, sans-serif" font-size="20">Apps · websites · AI · real-world problems</text>
+</svg>
