@@ -1,4 +1,8 @@
-# Apple iPhone 18 Pro reference audit
+# Historical reference audit: Apple iPhone 18 Pro
+
+> This records an earlier comparison only. The current creative direction follows the owner's requested automotive-style pacing; see [Automotive-style motion and story audit](AUTOMOTIVE-STORY-AUDIT.md).
+
+The implementation notes below are historical, not a description of the current visual system. The current project visuals are authentic public captures or clearly labelled product-flow diagrams; there are no private-app CSS device screens.
 
 Reference reviewed: [Apple iPhone 18 Pro (India)](https://www.apple.com/in/iphone-18-pro/)
 

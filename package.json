@@ -12,6 +12,8 @@
     "test:browser": "playwright test",
     "capture:qa": "node scripts/capture-qa.mjs",
     "capture:media": "node scripts/capture-public-media.mjs",
+    "media:optimize": "node scripts/optimize-public-media.mjs",
+    "social:render": "node scripts/render-social-card.mjs",
     "perf": "node scripts/performance-audit.mjs"
   },
   "dependencies": {

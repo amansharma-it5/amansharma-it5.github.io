@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:4332';
+const port = process.env.PLAYWRIGHT_PORT ?? '4332';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: './tests',
@@ -18,9 +19,9 @@ export default defineConfig({
     screenshot: 'only-on-failure'
   },
   webServer: {
-    command: 'npm run preview -- --host 127.0.0.1 --port 4332',
+    command: `npm run preview -- --host 127.0.0.1 --port ${port}`,
     url: baseURL,
-    reuseExistingServer: false,
+    reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === 'true' && !process.env.CI,
     env: { ASTRO_PREVIEW_BACKGROUND: '0' },
     timeout: 120_000
   }

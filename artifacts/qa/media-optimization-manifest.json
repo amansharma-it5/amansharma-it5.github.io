@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-09-21T14:30:30.004Z",
+  "encoder": "FFmpeg libwebp",
+  "manifest": [
+    {
+      "source": "instafetch-live.jpg",
+      "sourceWidth": 1440,
+      "sourceHeight": 900,
+      "sourceBytes": 94092,
+      "codec": "WebP",
+      "quality": 84,
+      "variants": [
+        {
+          "file": "instafetch-live-480.webp",
+          "width": 480,
+          "height": 300,
+          "bytes": 10770
+        },
+        {
+          "file": "instafetch-live-768.webp",
+          "width": 768,
+          "height": 480,
+          "bytes": 20372
+        },
+        {
+          "file": "instafetch-live-1440.webp",
+          "width": 1440,
+          "height": 900,
+          "bytes": 45882
+        }
+      ]
+    },
+    {
+      "source": "recruitos-ai-live.jpg",
+      "sourceWidth": 1440,
+      "sourceHeight": 900,
+      "sourceBytes": 76136,
+      "codec": "WebP",
+      "quality": 84,
+      "variants": [
+        {
+          "file": "recruitos-ai-live-480.webp",
+          "width": 480,
+          "height": 300,
+          "bytes": 8466
+        },
+        {
+          "file": "recruitos-ai-live-768.webp",
+          "width": 768,
+          "height": 480,
+          "bytes": 16922
+        },
+        {
+          "file": "recruitos-ai-live-1440.webp",
+          "width": 1440,
+          "height": 900,
+          "bytes": 41430
+        }
+      ]
+    },
+    {
+      "source": "frost-flowers-live.jpg",
+      "sourceWidth": 1440,
+      "sourceHeight": 900,
+      "sourceBytes": 97049,
+      "codec": "WebP",
+      "quality": 84,
+      "variants": [
+        {
+          "file": "frost-flowers-live-480.webp",
+          "width": 480,
+          "height": 300,
+          "bytes": 12380
+        },
+        {
+          "file": "frost-flowers-live-768.webp",
+          "width": 768,
+          "height": 480,
+          "bytes": 23228
+        },
+        {
+          "file": "frost-flowers-live-1440.webp",
+          "width": 1440,
+          "height": 900,
+          "bytes": 53662
+        }
+      ]
+    }
+  ]
+}

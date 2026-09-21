@@ -3,12 +3,13 @@
     "argv": [
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\dell\\Documents\\Codex\\2026-09-20\\files-pasted-by-the-user-codex\\work\\amansharma-it5.github.io\\node_modules\\@playwright\\test\\cli.js",
-      "test"
+      "test",
+      "--workers=2"
     ],
     "configFile": "C:\\Users\\dell\\Documents\\Codex\\2026-09-20\\files-pasted-by-the-user-codex\\work\\amansharma-it5.github.io\\playwright.config.mjs",
     "rootDir": "C:/Users/dell/Documents/Codex/2026-09-20/files-pasted-by-the-user-codex/work/amansharma-it5.github.io/tests",
     "failOnFlakyTests": false,
-    "forbidOnly": true,
+    "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
     "globalTeardown": null,
@@ -24,7 +25,7 @@
       {
         "outputDir": "C:/Users/dell/Documents/Codex/2026-09-20/files-pasted-by-the-user-codex/work/amansharma-it5.github.io/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 0,
         "metadata": {
           "actualWorkers": 2
         },
@@ -64,7 +65,7 @@
     "webServer": {
       "command": "npm run preview -- --host 127.0.0.1 --port 4332",
       "url": "http://127.0.0.1:4332",
-      "reuseExistingServer": false,
+      "reuseExistingServer": true,
       "env": {
         "ASTRO_PREVIEW_BACKGROUND": "0"
       },
@@ -79,7 +80,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "home page navigation targets exist and use the actual section ids",
+          "title": "global and local navigation only point to real home sections",
           "ok": true,
           "tags": [],
           "tests": [
@@ -94,12 +95,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5465,
+                  "duration": 6212,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:27:55.082Z",
+                  "startTime": "2026-09-21T15:14:47.278Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -107,13 +108,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-4ee303c3ec75b1c01716",
+          "id": "ba739f9f37d620dd5241-59eaa5060e56011fc329",
           "file": "portfolio.spec.mjs",
-          "line": 15,
+          "line": 17,
           "column": 1
         },
         {
-          "title": "mobile homepage uses one persistent section menu that opens, navigates, and closes",
+          "title": "mobile section menu discloses, closes with Escape, restores focus and navigates",
           "ok": true,
           "tags": [],
           "tests": [
@@ -128,12 +129,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 3966,
+                  "duration": 6353,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:27:55.030Z",
+                  "startTime": "2026-09-21T15:14:47.190Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -141,47 +142,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-92f337a5994ca3cdae15",
+          "id": "ba739f9f37d620dd5241-d3835e3a204c41aa2845",
           "file": "portfolio.spec.mjs",
-          "line": 25,
+          "line": 37,
           "column": 1
         },
         {
-          "title": "carousel keyboard support is scoped and never steals search input arrows",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 4472,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-09-21T01:27:59.528Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ba739f9f37d620dd5241-85a4d37007013b3fd39d",
-          "file": "portfolio.spec.mjs",
-          "line": 40,
-          "column": 1
-        },
-        {
-          "title": "project category tabs and archive search update the selected content",
+          "title": "highlight carousel supports scoped keyboard input and horizontal touch swipes",
           "ok": true,
           "tags": [],
           "tests": [
@@ -196,12 +163,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5452,
+                  "duration": 5554,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:01.046Z",
+                  "startTime": "2026-09-21T15:14:54.291Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -209,13 +176,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-f3369ada8b56f5a14a66",
+          "id": "ba739f9f37d620dd5241-fef6eb5d02c508ab0ef5",
           "file": "portfolio.spec.mjs",
-          "line": 59,
+          "line": 56,
           "column": 1
         },
         {
-          "title": "every project case-study route has unique story beats and an honest visual label",
+          "title": "product universe tabs, project selectors and documented-flow controls work",
           "ok": true,
           "tags": [],
           "tests": [
@@ -230,12 +197,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5595,
+                  "duration": 8251,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:04.033Z",
+                  "startTime": "2026-09-21T15:14:54.346Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -243,13 +210,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-fd0724b5d4ddd753025b",
+          "id": "ba739f9f37d620dd5241-c2407c2516206f11a224",
           "file": "portfolio.spec.mjs",
-          "line": 81,
+          "line": 87,
           "column": 1
         },
         {
-          "title": "image assets exist and all rendered images have useful alternative text",
+          "title": "live-site capture gallery opens as an accessible dialog and returns focus",
           "ok": true,
           "tags": [],
           "tests": [
@@ -264,12 +231,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2263,
+                  "duration": 7208,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:06.536Z",
+                  "startTime": "2026-09-21T15:14:59.950Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -277,13 +244,47 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-6ac3749e13575bc0531e",
+          "id": "ba739f9f37d620dd5241-dbf88c8e2cb9f427405c",
           "file": "portfolio.spec.mjs",
-          "line": 94,
+          "line": 110,
           "column": 1
         },
         {
-          "title": "layout does not create horizontal overflow at mobile, tablet, desktop or wide sizes",
+          "title": "missing public screenshot has an honest, accessible fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8223,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:02.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-44a3c56d1a72ff4fb025",
+          "file": "portfolio.spec.mjs",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "archive search includes status, category filters, and clear empty results",
           "ok": true,
           "tags": [],
           "tests": [
@@ -298,12 +299,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3809,
+                  "duration": 4145,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:08.835Z",
+                  "startTime": "2026-09-21T15:15:07.270Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -311,13 +312,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-8bbc0031ae83d7ec641c",
+          "id": "ba739f9f37d620dd5241-76692cccc0d7f1eb17f4",
           "file": "portfolio.spec.mjs",
-          "line": 105,
+          "line": 138,
           "column": 1
         },
         {
-          "title": "reduced-motion preference keeps content available and disables the WebGL canvas",
+          "title": "every project route loads directly with unique verified story content and clear status",
           "ok": true,
           "tags": [],
           "tests": [
@@ -332,12 +333,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1640,
+                  "duration": 12158,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:09.674Z",
+                  "startTime": "2026-09-21T15:15:11.076Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -345,13 +346,149 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-0db4ba50ea056b2eb2a7",
+          "id": "ba739f9f37d620dd5241-93e1c2a35adc83d236ec",
           "file": "portfolio.spec.mjs",
-          "line": 123,
+          "line": 157,
           "column": 1
         },
         {
-          "title": "production first paint and JavaScript transfer stay within the portfolio budget",
+          "title": "case-study flow can be selected and reverse scrolling updates the same stage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:11.532Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-92412be0d30cb07848de",
+          "file": "portfolio.spec.mjs",
+          "line": 170,
+          "column": 1
+        },
+        {
+          "title": "project image paths resolve and meaningful images have alternative text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3621,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:15.853Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-157a65061df793d89b4d",
+          "file": "portfolio.spec.mjs",
+          "line": 184,
+          "column": 1
+        },
+        {
+          "title": "contact identity and social preview metadata are consistent and fetchable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2140,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:19.582Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-2136a6be0be95361cc2e",
+          "file": "portfolio.spec.mjs",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "title": "layout avoids horizontal overflow at required widths and on every case route",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7536,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:21.789Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-ebe8548964b882ff49fc",
+          "file": "portfolio.spec.mjs",
+          "line": 225,
+          "column": 1
+        },
+        {
+          "title": "reduced-motion and low-memory modes keep a complete static product fallback",
           "ok": true,
           "tags": [],
           "tests": [
@@ -366,18 +503,86 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2962,
+                  "duration": 4148,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:11.343Z",
+                  "startTime": "2026-09-21T15:15:23.425Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-9c3db46e606cb347d139",
+          "file": "portfolio.spec.mjs",
+          "line": 253,
+          "column": 1
+        },
+        {
+          "title": "desktop WebGL is interactive, on-demand and paused when its hero scrolls offscreen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5974,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:27.738Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ba739f9f37d620dd5241-32554487bb000da9f127",
+          "file": "portfolio.spec.mjs",
+          "line": 277,
+          "column": 1
+        },
+        {
+          "title": "first paint and mobile JavaScript stay within measured budgets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T15:15:29.377Z",
                   "annotations": [],
                   "attachments": [
                     {
-                      "name": "performance-budget.json",
+                      "name": "mobile-performance-budget.json",
                       "contentType": "application/json",
-                      "body": "ewogICJmaXJzdENvbnRlbnRmdWxQYWludE1zIjogMjQwLAogICJzYW1lT3JpZ2luSmF2YVNjcmlwdEVuY29kZWRCeXRlcyI6IDI5OTg2MywKICAic2NyaXB0cyI6IFsKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9Mb2NhbE5hdi5Da1M5cmtyTy5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA4MTAKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vY2xpZW50LkQ2a1FjNVlxLmpzIiwKICAgICAgImVuY29kZWRCeXRlcyI6IDU2MTA4CiAgICB9LAogICAgewogICAgICAicGF0aCI6ICIvX2FzdHJvL0NpbmVtYXRpY0hlcm8uQnlfX0xjSzQuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogMTgxMQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9IaWdobGlnaHRzLkNreEpwNDBILmpzIiwKICAgICAgImVuY29kZWRCeXRlcyI6IDkxMAogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9Qcm9kdWN0VW5pdmVyc2UuQzByZnpYNWEuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogMTA5MQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9Qcm9qZWN0RXhwbG9yZXIuaXIxTWNTYmsuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogNjk0MQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9TY3JvbGxEaXJlY3Rvci5CdlZDclR4NC5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA3OTIKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vcmVhY3QuQjhVZUlFSksuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogMzE2MQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9qc3gtcnVudGltZS5FWDE2STUzOC5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA0MjQKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vUHJvamVjdFZpc3VhbC5COVhwWnlWdi5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA5MTUKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vcHJlbG9hZC1oZWxwZXIuQjNuZk9pNUkuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogNzQyCiAgICB9LAogICAgewogICAgICAicGF0aCI6ICIvX2FzdHJvL3NjaGVkdWxlci5RN29KeUVrUi5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiAxNTU5CiAgICB9LAogICAgewogICAgICAicGF0aCI6ICIvX2FzdHJvL1NjZW5lSXNsYW5kLkJja3pTVEVlLmpzIiwKICAgICAgImVuY29kZWRCeXRlcyI6IDUyOQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9JbW1lcnNpdmVTY2VuZS5KZUktZU5BMy5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiAyMjQwNzAKICAgIH0KICBdCn0="
+                      "body": "ewogICJmaXJzdENvbnRlbnRmdWxQYWludE1zIjogMzg0LAogICJzYW1lT3JpZ2luSmF2YVNjcmlwdEVuY29kZWRCeXRlcyI6IDY1OTM0LAogICJzYW1lT3JpZ2luSW1hZ2VFbmNvZGVkQnl0ZXMiOiAxMDc3MCwKICAic2NyaXB0cyI6IFsKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9Mb2NhbE5hdi5Ed0xBRnhUWC5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA5MTQKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vY2xpZW50LkQ2a1FjNVlxLmpzIiwKICAgICAgImVuY29kZWRCeXRlcyI6IDU2MTA4CiAgICB9LAogICAgewogICAgICAicGF0aCI6ICIvX2FzdHJvL0NpbmVtYXRpY0hlcm8uQ0cteUUyaGMuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogMjIzNAogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9TY3JvbGxEaXJlY3Rvci5CdlZDclR4NC5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA3OTIKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vcmVhY3QuQjhVZUlFSksuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogMzE2MQogICAgfSwKICAgIHsKICAgICAgInBhdGgiOiAiL19hc3Ryby9qc3gtcnVudGltZS5FWDE2STUzOC5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiA0MjQKICAgIH0sCiAgICB7CiAgICAgICJwYXRoIjogIi9fYXN0cm8vcHJlbG9hZC1oZWxwZXIuQjNuZk9pNUkuanMiLAogICAgICAiZW5jb2RlZEJ5dGVzIjogNzQyCiAgICB9LAogICAgewogICAgICAicGF0aCI6ICIvX2FzdHJvL3NjaGVkdWxlci5RN29KeUVrUi5qcyIsCiAgICAgICJlbmNvZGVkQnl0ZXMiOiAxNTU5CiAgICB9CiAgXQp9"
                     }
                   ]
                 }
@@ -385,18 +590,18 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-faac2632b5ba7a2bd915",
+          "id": "ba739f9f37d620dd5241-c4d2cfa64b3884d3306a",
           "file": "portfolio.spec.mjs",
-          "line": 131,
+          "line": 298,
           "column": 1
         },
         {
-          "title": "home and case study pages have no uncaught browser errors or axe WCAG A/AA violations",
+          "title": "all generated routes have no uncaught browser errors and pass axe WCAG A/AA",
           "ok": true,
           "tags": [],
           "tests": [
             {
-              "timeout": 30000,
+              "timeout": 120000,
               "annotations": [],
               "expectedStatus": "passed",
               "projectId": "",
@@ -406,12 +611,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 13865,
+                  "duration": 44514,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:12.687Z",
+                  "startTime": "2026-09-21T15:15:31.346Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -419,13 +624,13 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-bbf874599c58b81a4b4b",
+          "id": "ba739f9f37d620dd5241-c717a35f6e9dae4e3150",
           "file": "portfolio.spec.mjs",
-          "line": 151,
+          "line": 321,
           "column": 1
         },
         {
-          "title": "verified public deployments remain reachable",
+          "title": "new-tab links are marked safe and verified public deployments are reachable",
           "ok": true,
           "tags": [],
           "tests": [
@@ -440,12 +645,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1039,
+                  "duration": 3574,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-21T01:28:14.333Z",
+                  "startTime": "2026-09-21T15:15:33.765Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -453,9 +658,9 @@
               "status": "expected"
             }
           ],
-          "id": "ba739f9f37d620dd5241-f45a1906146765fc16fb",
+          "id": "ba739f9f37d620dd5241-2e3ef5fcfe70ce540e93",
           "file": "portfolio.spec.mjs",
-          "line": 168,
+          "line": 341,
           "column": 1
         }
       ]
@@ -463,9 +668,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-21T01:27:46.659Z",
-    "duration": 40686.232,
-    "expected": 11,
+    "startTime": "2026-09-21T15:14:43.346Z",
+    "duration": 127019.972,
+    "expected": 17,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

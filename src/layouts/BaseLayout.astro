@@ -11,7 +11,7 @@ interface Props {
 const {
   title = 'Aman Sharma — Product builder & creative technologist',
   description = 'Aman Sharma builds thoughtful Android products, useful web tools and expressive interfaces from first principle to shipped surface.',
-  image = '/assets/images/social-card.svg'
+  image = '/assets/images/social-card.jpg'
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
@@ -26,15 +26,30 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link id="async-web-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" media="print" />
+    <script is:inline>
+      const webFonts = document.getElementById('async-web-fonts');
+      if (webFonts instanceof HTMLLinkElement) webFonts.addEventListener('load', () => { webFonts.media = 'all'; }, { once: true });
+    </script>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" /></noscript>
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aman Sharma — Portfolio" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aman Sharma — independent product builder and technical talent partner." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content="Aman Sharma — independent product builder and technical talent partner." />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -69,7 +84,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
     </footer>
     <ScrollDirector client:load />
     <script>
-      const menuButton = document.querySelector('.menu-toggle');
+      const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const navigation = document.querySelector('#site-navigation');
       menuButton?.addEventListener('click', () => {
         const open = menuButton.getAttribute('aria-expanded') === 'true';
@@ -80,6 +95,13 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
         menuButton?.setAttribute('aria-expanded', 'false');
         navigation?.classList.remove('is-open');
       }));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+          menuButton.setAttribute('aria-expanded', 'false');
+          navigation?.classList.remove('is-open');
+          menuButton.focus();
+        }
+      });
     </script>
   </body>
 </html>
