@@ -11,7 +11,19 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },
-    { name: 'firefox', use: { browserName: 'firefox' } },
+    {
+      name: 'firefox',
+      use: {
+        browserName: 'firefox',
+        launchOptions: {
+          firefoxUserPrefs: {
+            'webgl.disabled': false,
+            'webgl.force-enabled': true,
+            'webgl.disable-fail-if-major-performance-caveat': true
+          }
+        }
+      }
+    },
     { name: 'webkit', use: { browserName: 'webkit' } }
   ],
   reporter: [
