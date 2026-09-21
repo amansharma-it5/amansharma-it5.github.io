@@ -47,14 +47,14 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="site-header">
+    <header class={`site-header${Astro.url.pathname === '/' ? ' site-header--home' : ''}`}>
       <div class="shell site-header__inner">
         <a class="wordmark" href="/" aria-label="Aman Sharma home"><span>AS</span><em>AMAN SHARMA</em></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="sr-only">Toggle navigation</span><i /><i /></button>
         <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
-          <a href="/#work">Work <span>01</span></a>
+          <a href="/#highlights">Work <span>01</span></a>
           <a href="/#about">About <span>02</span></a>
-          <a href="/#labs">Archive <span>03</span></a>
+          <a href="/#comparison">Archive <span>03</span></a>
           <a href="/#contact">Contact <span>04</span></a>
         </nav>
         <a class="header-status" href="mailto:amansharma.i5@gmail.com"><i />Open to thoughtful work</a>

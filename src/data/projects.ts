@@ -1,6 +1,12 @@
 export type ProjectStatus = 'Live' | 'MVP / pre-release' | 'In development' | 'Paused';
 export type ProjectKind = 'phone' | 'browser' | 'code' | 'catalogue';
 
+export interface ProjectStoryBeat {
+  label: string;
+  title: string;
+  description: string;
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -16,6 +22,7 @@ export interface Project {
   stack: string[];
   engineering: string;
   journey: string;
+  story: ProjectStoryBeat[];
   source: string;
   confidence: string;
   featured?: boolean;
@@ -53,6 +60,12 @@ export const projects: Project[] = [
     stack: ['Kotlin', 'Jetpack Compose', 'Room', 'Navigation Compose', 'Android PdfDocument'],
     engineering: 'Room → Repository → ViewModel → Compose UI, with a separate report assembler → PDF generator → secure sharer pipeline.',
     journey: 'The repository describes this as an MVP suitable for local APK testing and demonstrations. It is not published to the Play Store.',
+    story: [
+      { label: 'Case model', title: 'Build a case, not a feed', description: 'The product keeps a civic issue, its location, notes, photos and status together so the record can be revisited as one dated case.' },
+      { label: 'Evidence flow', title: 'Evidence needs a timeline', description: 'Optional coordinates, timestamped photos and chronological follow-ups make the progression of a case legible without relying on a cloud account.' },
+      { label: 'Report boundary', title: 'Reports are part of the product', description: 'A local report assembler hands structured evidence to Android PdfDocument, then passes the result to a secure sharing step.' },
+      { label: 'Honest state', title: 'The honest state is MVP', description: 'The repository positions CivicProof for local APK testing and demonstrations; its Play Store status is intentionally not implied.' }
+    ],
     source: 'Private repository; facts summarized from the project README.',
     confidence: 'High — README and source structure reviewed',
     featured: true,
@@ -75,6 +88,12 @@ export const projects: Project[] = [
     stack: ['Kotlin', 'Jetpack Compose', 'Media3', 'DataStore', 'Navigation Compose'],
     engineering: 'Domain models, repositories, feature ViewModels and playback ownership are separated. Remote catalog loading remains behind an HTTPS configuration boundary.',
     journey: 'The latest repository notes describe Phase 21 catalog expansion, an unsigned release artifact and remaining physical-device / production-content verification.',
+    story: [
+      { label: 'Discovery', title: 'Discovery with a language switch', description: 'English and Hindi discovery flows are treated as part of the product model, not as a cosmetic translation layer.' },
+      { label: 'Playback', title: 'Playback owns the routine', description: 'Favorites, recent history, a full player, Daily Bhakti and mantra counting give the listening journey distinct states.' },
+      { label: 'Aarti mode', title: 'Aarti mode has boundaries', description: 'Lyrics and keep-awake control are explicit playback tools, keeping the mode understandable instead of hiding behavior behind a generic player.' },
+      { label: 'Availability', title: 'Catalog availability is explicit', description: 'The remote catalog seam stays behind HTTPS configuration while local fallback behavior and remaining content verification remain visible.' }
+    ],
     source: 'Private repository; facts summarized from the project README and checked-in documentation.',
     confidence: 'High — README and source structure reviewed',
     featured: true,
@@ -97,6 +116,12 @@ export const projects: Project[] = [
     stack: ['Expo', 'React Native', 'TypeScript', 'Supabase', 'Expo Router'],
     engineering: 'Authoritative room commands, bounded clock-offset estimation, optimistic queue versions, private realtime broadcast / presence and explicit unconfigured states are documented boundaries.',
     journey: 'The repository describes locally validated foundations through Android release readiness. Hosted credentials, real provider playback and production signing remain unconfigured.',
+    story: [
+      { label: 'Room lifecycle', title: 'A room has a lifecycle', description: 'Home, discovery, create, activity and profile surfaces lead into a private room flow with invites and a lobby preflight.' },
+      { label: 'Queue authority', title: 'Queue authority must be explicit', description: 'The foundation separates authoritative room commands from local queue preview so participants can understand what is shared.' },
+      { label: 'Sync recovery', title: 'Sync is a recovery problem', description: 'Bounded clock-offset estimation, optimistic queue versions and a provider-neutral adapter are documented as runtime boundaries.' },
+      { label: 'Hosted state', title: 'Hosted state is still a boundary', description: 'Supabase policies, realtime transport and safety foundations are described, while hosted credentials and real provider playback remain unconfigured.' }
+    ],
     source: 'Private repository; facts summarized from the project README and checked-in documentation.',
     confidence: 'High — README and source structure reviewed',
     featured: true,
@@ -119,11 +144,17 @@ export const projects: Project[] = [
     stack: ['React', 'Vite', 'TypeScript', 'Express', 'yt-dlp / gallery-dl'],
     engineering: 'The documented API validates canonical Instagram routes, blocks arbitrary proxying, rate-limits work and keeps upstream media addresses server-side. Production verification is Reel-first.',
     journey: 'The repository README lists the production frontend at instafetch.pages.dev and documents a free-compatible Cloudflare Pages / Render deployment path.',
+    story: [
+      { label: 'Promise', title: 'A narrow promise', description: 'The public surface centers anonymous public-link resolution and makes Reel-first availability clearer than a broad download claim.' },
+      { label: 'Preview', title: 'Preview before transfer', description: 'The documented flow keeps a real preview and conditional format support ahead of a short-lived download link.' },
+      { label: 'Boundary', title: 'Upstream stays server-side', description: 'Canonical URL validation, bounded work, rate limits and server-side upstream addresses keep the public utility from becoming arbitrary proxying.' },
+      { label: 'Launch', title: 'Deployment is part of trust', description: 'The public README and live Pages URL are the source of truth for the shipped surface and its narrow production promise.' }
+    ],
     source: 'Public repository and public deployment verified.',
     confidence: 'High — public README and live URL returned HTTP 200',
     kind: 'browser',
-    image: '/assets/images/instafetch-preview.png',
-    imageAlt: 'InstaFetch preview graphic from the public project repository.',
+    image: '/assets/images/instafetch-live.png',
+    imageAlt: 'Authentic viewport capture of the public InstaFetch deployment.',
     live: 'https://instafetch.pages.dev',
     repo: 'https://github.com/amansharma-it5/instafetch',
     accent: '#7f88ff'
@@ -143,11 +174,17 @@ export const projects: Project[] = [
     stack: ['React', 'Vite', 'TypeScript', 'IndexedDB', 'Supabase / Netlify'],
     engineering: 'The project separates local analysis from optional provider calls, keeps source text out of analysis history and revalidates AI suggestions before acceptance.',
     journey: 'The public repository documents guest mode, account flows, local export and the live Pages deployment. The score is presented as a rule-based signal, not a hiring prediction.',
+    story: [
+      { label: 'Signal', title: 'Analysis stays explainable', description: 'The public workspace presents deterministic ATS signals and local parsing as understandable inputs rather than an opaque hiring prediction.' },
+      { label: 'Evidence', title: 'Evidence before rewriting', description: 'The evidence matrix and conservative requirement matching keep resume changes tied to the material being reviewed.' },
+      { label: 'Privacy', title: 'Local-first by default', description: 'Guest analysis, local file parsing and local export keep the first path useful without silently uploading sensitive documents.' },
+      { label: 'Copilot', title: 'Copilot is reviewable', description: 'Optional AI suggestions pass through consent, diff, review and validation before a user can accept a change.' }
+    ],
     source: 'Public repository and public deployment verified.',
     confidence: 'High — public README and live URL returned HTTP 200',
     kind: 'browser',
-    image: '/assets/images/resume-fit-preview.png',
-    imageAlt: 'RecruitOS AI interface preview from the public project repository.',
+    image: '/assets/images/recruitos-ai-live.png',
+    imageAlt: 'Authentic viewport capture of the public RecruitOS AI deployment.',
     live: 'https://resume-fit-checker.pages.dev',
     repo: 'https://github.com/amansharma-it5/resume-fit-checker',
     accent: '#9d8bff'
@@ -167,11 +204,17 @@ export const projects: Project[] = [
     stack: ['Next.js', 'Supabase', 'Razorpay', 'Cloudflare Workers', 'PostgreSQL'],
     engineering: 'The documented payment flow reserves inventory transactionally, verifies callbacks and treats late payments and duplicate callbacks as explicit states.',
     journey: 'The repository includes 39 catalogue products and 179 product photographs from an owner-provided catalogue. Ordering remains disabled until the documented service configuration is complete.',
+    story: [
+      { label: 'Catalogue', title: 'Catalogue before checkout', description: 'The public storefront leads with a verified catalogue and product photography before the transactional boundary is enabled.' },
+      { label: 'Payments', title: 'Payments need reconciliation', description: 'The documented flow reserves inventory transactionally, verifies callbacks and keeps late or duplicate payments explicit.' },
+      { label: 'State', title: 'Disabled is a valid state', description: 'Ordering stays disabled until the documented services are configured; the interface does not imply that a demo is accepting orders.' },
+      { label: 'Photography', title: 'Photography is product data', description: 'The repository records 39 catalogue products and 179 owner-provided photographs as part of the commerce surface.' }
+    ],
     source: 'Public repository and public deployment verified.',
     confidence: 'High — public README and live URL returned HTTP 200',
     kind: 'catalogue',
-    image: '/assets/images/frost-flowers.jpg',
-    imageAlt: 'Pink and purple Frost & Flowers bouquet from the verified project catalogue.',
+    image: '/assets/images/frost-flowers-live.png',
+    imageAlt: 'Authentic viewport capture of the public Frost & Flowers deployment.',
     live: 'https://frost-and-flowers-store.amansharma-it5.workers.dev',
     repo: 'https://github.com/amansharma-it5/frost-and-flowers-store',
     accent: '#ff8eb3'
@@ -191,6 +234,11 @@ export const projects: Project[] = [
     stack: ['C++'],
     engineering: 'No product documentation or deployment surface was found; the portfolio keeps the description intentionally narrow.',
     journey: 'The repository history shows a November 2024 main-branch snapshot.',
+    story: [
+      { label: 'Archive', title: 'A small public archive', description: 'The repository is presented as a compact record of C++ practice, not as a shipped product.' },
+      { label: 'Scope', title: 'Small files, clear scope', description: 'The visible exercise files are kept intentionally narrow because no broader product documentation was found.' },
+      { label: 'History', title: 'History is the evidence', description: 'The November 2024 main-branch snapshot is the reliable boundary for what this archive represents.' }
+    ],
     source: 'Public repository; sparse documentation.',
     confidence: 'Medium — public repository with sparse documentation',
     kind: 'code',
@@ -212,6 +260,11 @@ export const projects: Project[] = [
     stack: ['C++'],
     engineering: 'The repository contains a small number of named solution files and no README or deployment surface, so the portfolio does not infer more than that.',
     journey: 'The repository history shows a November 2024 main-branch snapshot.',
+    story: [
+      { label: 'Practice', title: 'Problem solving as a trail', description: 'Named solution files create a visible trail of deliberate algorithm practice without turning the archive into a product claim.' },
+      { label: 'Inspectability', title: 'Minimal is inspectable', description: 'The repository has a small number of public files and no README or deployment surface, so the story stays close to the evidence.' },
+      { label: 'History', title: 'A dated learning snapshot', description: 'The November 2024 main-branch history is the boundary used for this archive entry.' }
+    ],
     source: 'Public repository; sparse documentation.',
     confidence: 'Medium — public repository with sparse documentation',
     kind: 'code',

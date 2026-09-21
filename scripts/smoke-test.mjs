@@ -17,9 +17,9 @@ const required = [
   'projects/leetcode-probs/index.html',
   'robots.txt',
   'sitemap.xml',
-  'assets/images/instafetch-preview.png',
-  'assets/images/resume-fit-preview.png',
-  'assets/images/frost-flowers.jpg'
+  'assets/images/instafetch-live.png',
+  'assets/images/recruitos-ai-live.png',
+  'assets/images/frost-flowers-live.png'
 ];
 
 const missing = required.filter((file) => !existsSync(join(rootPath, file)));

@@ -8,24 +8,27 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node scripts/smoke-test.mjs"
+    "test": "node scripts/smoke-test.mjs",
+    "test:browser": "playwright test",
+    "capture:qa": "node scripts/capture-qa.mjs",
+    "capture:media": "node scripts/capture-public-media.mjs",
+    "perf": "node scripts/performance-audit.mjs"
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
-    "@react-three/drei": "^10.7.6",
+    "@astrojs/react": "^6.0.6",
     "@react-three/fiber": "^9.3.0",
-    "astro": "^5.14.1",
-    "gsap": "^3.13.0",
+    "astro": "^7.3.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "three": "^0.178.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@types/three": "^0.178.1",
-    "eslint": "^9.35.0",
     "typescript": "^5.9.2"
   }
 }

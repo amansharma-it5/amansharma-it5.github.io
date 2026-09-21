@@ -1,0 +1,222 @@
+{
+  "baseUrl": "https://amansharma-it5.github.io",
+  "generatedAt": "2026-09-21T00:06:38.272Z",
+  "evidence": [
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-hero-start.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "hero-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-hero-middle.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "hero-middle"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-hero-end.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "hero-end"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-highlights.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "highlights"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-product-universe.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "product-universe"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-archive.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "archive"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-contact.png",
+      "viewport": "mobile-390x844",
+      "route": "/",
+      "capture": "contact"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-case-civicproof.png",
+      "viewport": "mobile-390x844",
+      "route": "/projects/civicproof/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\mobile-390x844-case-divyadhun.png",
+      "viewport": "mobile-390x844",
+      "route": "/projects/divyadhun/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-hero-start.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "hero-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-hero-middle.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "hero-middle"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-hero-end.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "hero-end"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-highlights.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "highlights"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-product-universe.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "product-universe"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-archive.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "archive"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-contact.png",
+      "viewport": "tablet-768x1024",
+      "route": "/",
+      "capture": "contact"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-case-civicproof.png",
+      "viewport": "tablet-768x1024",
+      "route": "/projects/civicproof/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\tablet-768x1024-case-divyadhun.png",
+      "viewport": "tablet-768x1024",
+      "route": "/projects/divyadhun/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-hero-start.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "hero-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-hero-middle.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "hero-middle"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-hero-end.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "hero-end"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-highlights.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "highlights"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-product-universe.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "product-universe"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-archive.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "archive"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-contact.png",
+      "viewport": "desktop-1440x900",
+      "route": "/",
+      "capture": "contact"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-case-civicproof.png",
+      "viewport": "desktop-1440x900",
+      "route": "/projects/civicproof/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\desktop-1440x900-case-divyadhun.png",
+      "viewport": "desktop-1440x900",
+      "route": "/projects/divyadhun/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-hero-start.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "hero-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-hero-middle.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "hero-middle"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-hero-end.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "hero-end"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-highlights.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "highlights"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-product-universe.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "product-universe"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-archive.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "archive"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-contact.png",
+      "viewport": "wide-1728x1117",
+      "route": "/",
+      "capture": "contact"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-case-civicproof.png",
+      "viewport": "wide-1728x1117",
+      "route": "/projects/civicproof/",
+      "capture": "case-study-start"
+    },
+    {
+      "file": "artifacts\\qa\\baseline\\wide-1728x1117-case-divyadhun.png",
+      "viewport": "wide-1728x1117",
+      "route": "/projects/divyadhun/",
+      "capture": "case-study-start"
+    }
+  ]
+}

@@ -26,13 +26,21 @@ export default function ProductUniverse({ projects }: { projects: Project[] }) {
   return (
     <div className="universe-viewer">
       <div className="universe-tabs" role="tablist" aria-label="Product categories">
-        {categories.map((item) => <button key={item.id} type="button" role="tab" aria-selected={category === item.id} className={category === item.id ? 'is-active' : ''} onClick={() => changeCategory(item.id)}>{item.label}</button>)}
+        {categories.map((item, index) => <button key={item.id} id={`universe-tab-${item.id}`} type="button" role="tab" aria-controls="universe-panel" aria-selected={category === item.id} tabIndex={category === item.id ? 0 : -1} className={category === item.id ? 'is-active' : ''} onClick={() => changeCategory(item.id)} onKeyDown={(event) => {
+          const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+          const targetIndex = event.key === 'Home' ? 0 : event.key === 'End' ? categories.length - 1 : (index + direction + categories.length) % categories.length;
+          if (!direction && event.key !== 'Home' && event.key !== 'End') return;
+          event.preventDefault();
+          const next = categories[targetIndex];
+          changeCategory(next.id);
+          document.getElementById(`universe-tab-${next.id}`)?.focus();
+        }}>{item.label}</button>)}
       </div>
-      <div className="universe-stage">
+      <div className="universe-stage" id="universe-panel" role="tabpanel" aria-labelledby={`universe-tab-${category}`}>
         <div className="universe-stage__visual"><ProjectVisual project={active} large /><span className="universe-stage__stamp">{active.status} / {active.category}</span></div>
         <div className="universe-stage__copy"><p className="eyebrow"><span>UNIVERSE / {String(matches.length).padStart(2, '0')}</span> {activeCategory.label}</p><h3>{active.name}<br /><em>{active.category}</em></h3><p>{active.summary}</p><div className="tag-row">{active.stack.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</div><a className="arrow-link" href={`/projects/${active.slug}/`}>Study this build <span>↗</span></a></div>
       </div>
-      <div className="universe-projects" aria-label={`${activeCategory.label} projects`}>{matches.map((project) => <button key={project.slug} type="button" className={project.slug === active.slug ? 'is-active' : ''} onClick={() => setActiveSlug(project.slug)}><span>{project.name}</span><small>{project.status}</small></button>)}</div>
+      <div className="universe-projects" aria-label={`${activeCategory.label} projects`}>{matches.map((project) => <button key={project.slug} type="button" aria-pressed={project.slug === active.slug} className={project.slug === active.slug ? 'is-active' : ''} onClick={() => setActiveSlug(project.slug)}><span>{project.name}</span><small>{project.status}</small></button>)}</div>
     </div>
   );
 }

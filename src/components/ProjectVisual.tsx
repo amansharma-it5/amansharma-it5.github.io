@@ -13,16 +13,15 @@ function BrowserSurface({ project }: { project: Project }) {
 }
 
 function PhoneSurface({ project }: { project: Project }) {
-  const isCivic = project.slug === 'civicproof';
   return (
     <div className="visual-phone" style={{ '--visual-accent': project.accent } as CSSProperties}>
       <div className="visual-phone__notch" />
-      <div className="visual-phone__screen">
-        <div className="phone-status"><span>9:41</span><span>▰ ◔</span></div>
-        <div className="phone-brand"><span>{isCivic ? 'CIVIC' : project.slug === 'watchroom' ? 'WATCHROOM' : 'DIVYADHUN'}</span><b>{isCivic ? 'Case 014' : project.slug === 'watchroom' ? 'Room 07' : 'Daily Bhakti'}</b></div>
+      <div className="visual-phone__screen" role="img" aria-label={`${project.name} decorative product map; no approved app screenshot is available`}>
+        <div className="phone-brand"><span>PRIVATE PROJECT / PRODUCT MAP</span><b>{project.name}</b></div>
         <div className="phone-orb" />
-        <div className="phone-lines"><i /><i /><i /></div>
-        <div className="phone-list"><span /><span /><span /></div>
+        <div className="phone-lines" aria-hidden="true"><i /><i /><i /></div>
+        <div className="phone-list" aria-hidden="true"><span /><span /><span /></div>
+        <small className="phone-disclaimer">DECORATIVE · NOT A SCREENSHOT</small>
       </div>
       <div className="visual-phone__reflection" />
     </div>
@@ -34,5 +33,10 @@ function CodeSurface({ project }: { project: Project }) {
 }
 
 export default function ProjectVisual({ project, large = false }: { project: Project; large?: boolean }) {
-  return <div className={`project-visual project-visual--${project.kind} ${large ? 'project-visual--large' : ''}`}><div className="project-visual__ambient" />{project.kind === 'browser' || project.kind === 'catalogue' ? <BrowserSurface project={project} /> : project.kind === 'phone' ? <PhoneSurface project={project} /> : <CodeSurface project={project} />}<span className="project-visual__stamp">{project.kind === 'phone' ? '3D DEVICE STUDY' : project.image ? 'VERIFIED ASSET' : 'DOCUMENTED SURFACE'}</span></div>;
+  const provenance = project.image
+    ? 'AUTHENTIC LIVE DEPLOYMENT CAPTURE'
+    : project.kind === 'phone'
+      ? 'DECORATIVE MAP · PRIVATE SOURCE'
+      : 'DOCUMENTED SURFACE';
+  return <div className={`project-visual project-visual--${project.kind} ${large ? 'project-visual--large' : ''}`}><div className="project-visual__ambient" />{project.kind === 'browser' || project.kind === 'catalogue' ? <BrowserSurface project={project} /> : project.kind === 'phone' ? <PhoneSurface project={project} /> : <CodeSurface project={project} />}<span className="project-visual__stamp">{provenance}</span></div>;
 }
