@@ -348,7 +348,7 @@ test('desktop WebGL is interactive, on-demand and paused when its hero scrolls o
   await expect(showroom.locator('.universe-showroom__active')).toContainText('CivicProof');
   await page.locator('.universe-projects').getByRole('button', { name: /DivyaDhun/ }).click();
   await expect(showroom.locator('.universe-showroom__active')).toContainText('DivyaDhun');
-  await showroomScene.locator(':scope > div').click({ position: { x: 798, y: 110 } });
+  await showroomScene.locator(':scope > div').click({ position: { x: 798, y: 205 } });
   await expect(showroom.locator('.universe-showroom__active')).toContainText('Watchroom');
 });
 
