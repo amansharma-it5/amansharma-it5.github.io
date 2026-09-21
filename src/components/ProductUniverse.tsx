@@ -59,7 +59,7 @@ export default function ProductUniverse({ projects }: { projects: Project[] }) {
           event.preventDefault();
           const next = categories[targetIndex];
           changeCategory(next.id);
-          document.getElementById(`universe-tab-${next.id}`)?.focus();
+          window.requestAnimationFrame(() => document.getElementById(`universe-tab-${next.id}`)?.focus());
         }}>{item.label}</button>)}
       </div>
       <div className="universe-stage" id="universe-panel" role="tabpanel" aria-labelledby={`universe-tab-${category}`}>

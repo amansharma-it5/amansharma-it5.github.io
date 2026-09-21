@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import ScrollDirector from '../components/ScrollDirector';
 
 interface Props {
   title?: string;
@@ -64,7 +63,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class={`site-header${Astro.url.pathname === '/' ? ' site-header--home' : ''}`}>
       <div class="shell site-header__inner">
-        <a class="wordmark" href="/" aria-label="Aman Sharma home"><span>AS</span><em>AMAN SHARMA</em></a>
+        <a class="wordmark" href="/"><span aria-hidden="true">AS</span><em>AMAN SHARMA</em></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="sr-only">Toggle navigation</span><i /><i /></button>
         <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
           <a href="/#highlights">Work <span>01</span></a>
@@ -82,8 +81,27 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
         <div><a href="https://github.com/amansharma-it5" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/amansharmanm/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:amansharma.i5@gmail.com">Email ↗</a></div>
       </div>
     </footer>
-    <ScrollDirector client:load />
     <script>
+      const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.reveal-on-scroll'));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion || !('IntersectionObserver' in window)) {
+        revealItems.forEach((element) => element.classList.add('is-visible'));
+      } else {
+        document.documentElement.classList.add('motion-ready');
+        revealItems.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) element.classList.add('is-visible');
+        });
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+        revealItems.filter((element) => !element.classList.contains('is-visible')).forEach((element) => revealObserver.observe(element));
+      }
+
       const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const navigation = document.querySelector('#site-navigation');
       menuButton?.addEventListener('click', () => {

@@ -33,10 +33,12 @@ jobs:
         run: npm run check
       - name: Build static site
         run: npm run build
-      - name: Install Chromium for browser tests
-        run: npx playwright install --with-deps chromium
+      - name: Install Chromium, Firefox and WebKit for browser tests
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Prepare virtual display and Mesa software WebGL for Firefox
+        run: sudo apt-get install -y xvfb libgl1-mesa-dri
       - name: Test browser behavior and accessibility
-        run: npm run test:browser
+        run: xvfb-run -a env LIBGL_ALWAYS_SOFTWARE=1 npm run test:browser
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4

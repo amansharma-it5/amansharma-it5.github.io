@@ -40,13 +40,11 @@ function ProductFlow({
       </div>
       <div className="flow-map__rail" role={interactive ? 'group' : undefined} aria-label={interactive ? `${project.name} flow steps` : undefined}>
         {project.story.map((step, index) => {
-          const label = `${String(index + 1).padStart(2, '0')} ${step.label}`;
           return interactive ? (
             <button
               key={`${project.slug}-${step.label}`}
               type="button"
               aria-pressed={activeStep === index}
-              aria-label={`Show ${project.name} flow step ${label}`}
               className={activeStep === index ? 'is-active' : ''}
               onClick={() => onSelect?.(index)}
             >
@@ -67,12 +65,14 @@ function ProductFlow({
 
 function ScreenshotDialog({ project }: { project: Project }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const openButton = useRef<HTMLButtonElement>(null);
 
   if (!project.image) return null;
 
   return (
     <>
       <button
+        ref={openButton}
         className="visual-browser__open"
         type="button"
         aria-label={`View full-size authentic ${project.name} website screenshot`}
@@ -84,6 +84,7 @@ function ScreenshotDialog({ project }: { project: Project }) {
         ref={dialog}
         className="screenshot-dialog"
         aria-label={`${project.name} authentic live website capture`}
+        onClose={() => openButton.current?.focus()}
         onClick={(event) => { if (event.target === dialog.current) dialog.current?.close(); }}
       >
         <div className="screenshot-dialog__bar">

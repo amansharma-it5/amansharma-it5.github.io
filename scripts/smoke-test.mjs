@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join, relative } from 'node:path';
 
 const root = new URL('../dist/', import.meta.url);
 const rootPath = root.pathname.replace(/^\//, '').replace(/^([A-Z]):/, '$1:');
@@ -41,6 +41,22 @@ walk(rootPath);
 const invalid = htmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('<title>'));
 if (invalid.length) {
   console.error(`HTML files without title:\n${invalid.join('\n')}`);
+  process.exit(1);
+}
+
+const sitemap = readFileSync(join(rootPath, 'sitemap.xml'), 'utf8');
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, value]) => new URL(value));
+const sitemapRoutes = sitemapUrls.map((url) => url.pathname).sort();
+const generatedRoutes = htmlFiles
+  .filter((file) => basename(file) !== '404.html')
+  .map((file) => `/${relative(rootPath, file).replaceAll('\\', '/').replace(/index\.html$/, '')}`)
+  .sort();
+const sitemapOriginValid = sitemapUrls.every((url) => url.origin === 'https://amansharma-it5.github.io');
+const sitemapRoutesUnique = new Set(sitemapRoutes).size === sitemapRoutes.length;
+if (!sitemapOriginValid || !sitemapRoutesUnique || JSON.stringify(sitemapRoutes) !== JSON.stringify(generatedRoutes)) {
+  console.error('Sitemap does not exactly match generated public routes.');
+  console.error(`Sitemap: ${sitemapRoutes.join(', ')}`);
+  console.error(`Generated: ${generatedRoutes.join(', ')}`);
   process.exit(1);
 }
 console.log(`Smoke test passed: ${htmlFiles.length} HTML routes and ${required.length} required outputs verified.`);

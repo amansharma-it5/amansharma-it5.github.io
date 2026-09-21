@@ -9,6 +9,27 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : undefined,
+  projects: [
+    { name: 'chromium', use: { browserName: 'chromium' } },
+    {
+      name: 'firefox',
+      use: {
+        browserName: 'firefox',
+        launchOptions: {
+          ...(process.env.CI ? { headless: false } : {}),
+          env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: '1', MOZ_WEBRENDER: '1' },
+          firefoxUserPrefs: {
+            'webgl.disabled': false,
+            'webgl.force-enabled': true,
+            'webgl.disable-fail-if-major-performance-caveat': true,
+            'gfx.webrender.all': true,
+            'gfx.webrender.software': true
+          }
+        }
+      }
+    },
+    { name: 'webkit', use: { browserName: 'webkit' } }
+  ],
   reporter: [
     ['list'],
     ['json', { outputFile: 'artifacts/qa/reports/playwright.json' }]

@@ -44,26 +44,25 @@ export default function CinematicHero({ projects }: { projects: Project[] }) {
       const startScene = () => {
         if (sceneStarted) return;
         sceneStarted = true;
-        window.removeEventListener('pointermove', startScene);
-        window.removeEventListener('wheel', startScene);
-        window.removeEventListener('touchstart', startScene);
-        window.removeEventListener('scroll', startScene);
-        window.removeEventListener('keydown', startScene);
+        sceneIntentCleanup?.();
         sceneTimer = window.setTimeout(() => {
           import('./SceneIsland').then(({ default: SceneIsland }) => { if (active) setHeroScene(() => SceneIsland); }).catch(() => undefined);
         }, 120);
       };
-      window.addEventListener('pointermove', startScene, { passive: true });
-      window.addEventListener('wheel', startScene, { passive: true });
-      window.addEventListener('touchstart', startScene, { passive: true });
-      window.addEventListener('scroll', startScene, { passive: true });
-      window.addEventListener('keydown', startScene, { passive: true });
+      const requestStoryScene = () => {
+        const section = sectionRef.current;
+        if (!section) return;
+        const range = Math.max(1, section.offsetHeight - window.innerHeight);
+        const storyProgress = clamp(-section.getBoundingClientRect().top / range);
+        if (storyProgress >= 0.14) startScene();
+      };
+      window.addEventListener('scroll', requestStoryScene, { passive: true });
+      window.addEventListener('resize', requestStoryScene, { passive: true });
+      sectionRef.current?.addEventListener('pointerdown', startScene, { passive: true });
       const stopWaiting = () => {
-        window.removeEventListener('pointermove', startScene);
-        window.removeEventListener('wheel', startScene);
-        window.removeEventListener('touchstart', startScene);
-        window.removeEventListener('scroll', startScene);
-        window.removeEventListener('keydown', startScene);
+        window.removeEventListener('scroll', requestStoryScene);
+        window.removeEventListener('resize', requestStoryScene);
+        sectionRef.current?.removeEventListener('pointerdown', startScene);
         if (sceneTimer) window.clearTimeout(sceneTimer);
       };
       sceneIntentCleanup = stopWaiting;
