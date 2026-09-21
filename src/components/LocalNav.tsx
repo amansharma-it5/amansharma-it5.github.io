@@ -42,10 +42,19 @@ export default function LocalNav() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
+
   return (
-    <nav className={`local-nav ${open ? 'is-open' : ''}`} aria-label="Portfolio sections" data-hydrated={hydrated} onKeyDown={(event) => {
-      if (event.key === 'Escape' && open) { setOpen(false); toggleRef.current?.focus(); }
-    }}>
+    <nav className={`local-nav ${open ? 'is-open' : ''}`} aria-label="Portfolio sections" data-hydrated={hydrated}>
       <div className="shell local-nav__inner">
         <a className="local-nav__identity" href="#overview">Aman Sharma <span>Portfolio / 2026</span></a>
         <button ref={toggleRef} className="local-nav__toggle" type="button" aria-controls="local-nav-links" aria-expanded={open} onClick={() => setOpen(!open)}><span>Sections</span><i /></button>

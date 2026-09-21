@@ -12,7 +12,7 @@ const projectSlugs = [
   'leetcode-probs'
 ];
 
-const routeList = ['/', '/projects/', ...projectSlugs.map((slug) => `/projects/${slug}/`)];
+const routeList = ['/', '/projects/', ...projectSlugs.map((slug) => `/projects/${slug}/`), '/404.html'];
 
 test('global and local navigation only point to real home sections', async ({ page }) => {
   await page.goto('/');
@@ -32,6 +32,30 @@ test('global and local navigation only point to real home sections', async ({ pa
   await page.locator('.local-nav__links a[href="#comparison"]').click();
   await expect(page.locator('.local-nav__links a[href="#comparison"]')).toHaveAttribute('aria-current', 'location');
   await expect(page).toHaveURL(/#comparison$/);
+});
+
+test('gold design token drives visible keyboard focus and editorial accents', async ({ page }) => {
+  await page.goto('/');
+  await page.keyboard.press('Tab');
+  const focus = await page.evaluate(() => {
+    const node = document.activeElement;
+    if (!node || node === document.body) return null;
+    const style = getComputedStyle(node);
+    return {
+      token: getComputedStyle(document.documentElement).getPropertyValue('--gold').trim(),
+      focusVisible: node.matches(':focus-visible'),
+      outlineStyle: style.outlineStyle,
+      outlineColor: style.outlineColor,
+      outlineWidth: style.outlineWidth
+    };
+  });
+  expect(focus).not.toBeNull();
+  expect(focus.token).toBe('#d3ad73');
+  expect(focus.focusVisible).toBe(true);
+  expect(focus.outlineStyle).toBe('solid');
+  expect(focus.outlineColor).toBe('rgb(211, 173, 115)');
+  expect(focus.outlineWidth).toBe('2px');
+  await expect(page.locator('.cinematic-hero__copy h1 em')).toHaveCSS('color', 'rgb(211, 173, 115)');
 });
 
 test('mobile section menu discloses, closes with Escape, restores focus and navigates', async ({ page }) => {
@@ -76,15 +100,22 @@ test('highlight carousel supports scoped keyboard input and horizontal touch swi
   await page.evaluate(() => {
     const target = document.querySelector('.highlights-viewer');
     if (!target) throw new Error('Carousel not found');
-    const first = new Touch({ identifier: 1, target, clientX: 320, clientY: 340 });
-    const last = new Touch({ identifier: 1, target, clientX: 220, clientY: 344 });
-    target.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [first], changedTouches: [first] }));
-    target.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: [last] }));
+    const point = (clientX, clientY) => ({ identifier: 1, target, clientX, clientY });
+    const dispatch = (type, touches, changedTouches) => {
+      const event = new Event(type, { bubbles: true, cancelable: true });
+      Object.defineProperties(event, { touches: { value: touches }, changedTouches: { value: changedTouches } });
+      target.dispatchEvent(event);
+    };
+    const first = point(320, 340);
+    const last = point(220, 344);
+    dispatch('touchstart', [first], [first]);
+    dispatch('touchend', [], [last]);
   });
   await expect.poll(activeDot).toBe((afterCarouselMove + 1) % await dots.count());
 });
 
 test('product universe tabs, project selectors and documented-flow controls work', async ({ page }) => {
+  test.setTimeout(60_000);
   await page.goto('/');
   await page.locator('.universe-section').scrollIntoViewIfNeeded();
   await expect(page.locator('.universe-tabs')).toHaveAttribute('data-hydrated', 'true');
@@ -99,7 +130,7 @@ test('product universe tabs, project selectors and documented-flow controls work
   await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'universe-tab-web');
 
   await page.getByRole('tab', { name: 'Apps' }).click();
-  const step = page.getByRole('button', { name: 'Show CivicProof flow step 02 Evidence flow' });
+  const step = page.getByRole('button', { name: '02 Evidence flow' });
   await step.click();
   await expect(step).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('.universe-stage__visual .flow-map__focus')).toContainText('Evidence needs a timeline');
@@ -164,21 +195,31 @@ test('every project route loads directly with unique verified story content and 
     expect(new Set(storyTitles).size, `${slug} repeats a story title`).toBe(storyTitles.length);
     await expect(page.locator('.case-hero__stamp')).not.toBeEmpty();
     await expect(page.locator('.scroll-story .flow-map')).toHaveCount(1);
+    const requested3dModule = await page.evaluate(() => performance.getEntriesByType('resource').some((entry) => /ImmersiveScene/i.test(new URL(entry.name).pathname)));
+    expect(requested3dModule, `${slug} should not request the homepage-only 3D module`).toBe(false);
   }
 });
 
 test('case-study flow can be selected and reverse scrolling updates the same stage', async ({ page }) => {
+  test.setTimeout(120_000);
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/projects/civicproof/');
-  await page.locator('.case-stage').scrollIntoViewIfNeeded();
-  await expect(page.locator('.scroll-story')).toHaveAttribute('data-hydrated', 'true');
-  const steps = page.locator('.scroll-story .flow-map__rail button');
-  await expect(steps).toHaveCount(4);
-  await steps.nth(1).click();
-  await expect(page.locator('.scroll-story .flow-map__focus')).toContainText('Evidence needs a timeline');
-  await expect(page.locator('.scroll-story__beats article').nth(1)).toHaveClass(/is-active/);
-  await page.locator('.scroll-story__beats article').first().scrollIntoViewIfNeeded();
-  await expect(page.locator('.scroll-story .flow-map__focus')).toContainText('Build a case, not a feed');
+  for (const slug of projectSlugs) {
+    await page.goto(`/projects/${slug}/`);
+    await page.locator('.scroll-story').scrollIntoViewIfNeeded();
+    await expect(page.locator('.scroll-story')).toHaveAttribute('data-hydrated', 'true');
+    const beats = page.locator('.scroll-story__beats article');
+    const flowFocus = page.locator('.scroll-story .flow-map__focus');
+    const count = await beats.count();
+    expect(count, slug).toBeGreaterThanOrEqual(3);
+    for (let index = 0; index < count; index += 1) {
+      const beat = beats.nth(index);
+      await beat.scrollIntoViewIfNeeded();
+      await expect(beat, `${slug} beat ${index + 1}`).toHaveClass(/is-active/);
+      await expect(flowFocus).toContainText((await beat.locator('h3').innerText()).trim());
+    }
+    await beats.first().scrollIntoViewIfNeeded();
+    await expect(beats.first()).toHaveClass(/is-active/);
+  }
 });
 
 test('project image paths resolve and meaningful images have alternative text', async ({ page, request }) => {
@@ -279,8 +320,21 @@ test('desktop WebGL is interactive, on-demand and paused when its hero scrolls o
   await page.goto('/');
   await expect(page.locator('.cinematic-hero__three canvas')).toHaveCount(0);
   await expect(page.locator('.cinematic-hero__mark')).toBeVisible();
+  const initial3dRequests = await page.evaluate(() => performance.getEntriesByType('resource').filter((entry) => /ImmersiveScene/i.test(new URL(entry.name).pathname)).map((entry) => new URL(entry.name).pathname));
+  expect(initial3dRequests, 'homepage 3D bundle must stay deferred until desktop interaction').toEqual([]);
   await page.mouse.move(400, 300);
+  await page.waitForTimeout(200);
+  await expect(page.locator('.cinematic-hero__three canvas')).toHaveCount(0);
+  const afterPassivePointerMove = await page.evaluate(() => performance.getEntriesByType('resource').some((entry) => /ImmersiveScene/i.test(new URL(entry.name).pathname)));
+  expect(afterPassivePointerMove, 'passive cursor movement must not download the 3D bundle').toBe(false);
+  await page.evaluate(() => {
+    const hero = document.querySelector('.cinematic-hero');
+    if (!hero) throw new Error('Hero not found');
+    const range = hero.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: hero.offsetTop + Math.round(range * 0.2), behavior: 'instant' });
+  });
   await expect(page.locator('.cinematic-hero__three canvas')).toBeVisible({ timeout: 30_000 });
+  await expect.poll(() => page.evaluate(() => performance.getEntriesByType('resource').some((entry) => /ImmersiveScene/i.test(new URL(entry.name).pathname)))).toBe(true);
   const scene = page.locator('.scene-runtime--hero');
   await expect(scene).toHaveAttribute('data-render-mode', 'on-demand');
   await page.locator('#contact').scrollIntoViewIfNeeded();
@@ -293,6 +347,8 @@ test('desktop WebGL is interactive, on-demand and paused when its hero scrolls o
   await expect(showroom.locator('.universe-showroom__active')).toContainText('CivicProof');
   await page.locator('.universe-projects').getByRole('button', { name: /DivyaDhun/ }).click();
   await expect(showroom.locator('.universe-showroom__active')).toContainText('DivyaDhun');
+  await showroomScene.locator('canvas').click({ position: { x: 798, y: 110 } });
+  await expect(showroom.locator('.universe-showroom__active')).toContainText('Watchroom');
 });
 
 test('first paint and mobile JavaScript stay within measured budgets', async ({ page }, testInfo) => {

@@ -16,7 +16,7 @@ const aiProjects = projects.filter((project) => project.filters.includes('ai'));
 ---
 <BaseLayout>
   <LocalNav client:load />
-  <CinematicHero client:load projects={highlightProjects} />
+  <CinematicHero client:media="(min-width: 621px)" projects={highlightProjects} />
 
   <section id="highlights" class="highlights-section section-grid" aria-labelledby="highlights-title">
     <div class="shell">

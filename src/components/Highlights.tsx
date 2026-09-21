@@ -61,7 +61,7 @@ export default function Highlights({ projects }: { projects: Project[] }) {
       </div>
       <div className="highlights-controls">
         <div className="highlights-dots" aria-label="Select highlight">
-          {projects.map((project, index) => <button key={project.slug} type="button" className={index === active ? 'is-active' : ''} aria-label={`Show ${project.name}`} aria-pressed={index === active} onClick={() => setActive(index)}><span>{String(index + 1).padStart(2, '0')}</span><i /></button>)}
+          {projects.map((project, index) => <button key={project.slug} type="button" className={index === active ? 'is-active' : ''} aria-label={`${String(index + 1).padStart(2, '0')} ${project.name}`} aria-pressed={index === active} onClick={() => setActive(index)}><span>{String(index + 1).padStart(2, '0')}</span><i /></button>)}
         </div>
         <div className="highlights-arrows"><button type="button" aria-label="Previous highlight" onClick={() => move(-1)}>←</button><button type="button" aria-label="Next highlight" onClick={() => move(1)}>→</button></div>
       </div>
