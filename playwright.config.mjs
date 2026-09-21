@@ -16,6 +16,7 @@ export default defineConfig({
       use: {
         browserName: 'firefox',
         launchOptions: {
+          ...(process.env.CI ? { headless: false } : {}),
           env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: '1', MOZ_WEBRENDER: '1' },
           firefoxUserPrefs: {
             'webgl.disabled': false,
