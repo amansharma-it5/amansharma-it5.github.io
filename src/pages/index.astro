@@ -21,14 +21,14 @@ const aiProjects = projects.filter((project) => project.filters.includes('ai'));
   <section id="highlights" class="highlights-section section-grid" aria-labelledby="highlights-title">
     <div class="shell">
       <div class="editorial-heading reveal-on-scroll"><p class="eyebrow"><span>02</span> Selected work</p><h2 id="highlights-title">Get the<br /><em>highlights.</em></h2><p>Six products. Six different constraints. One practice built around making the signal useful.</p></div>
-      <Highlights client:load projects={highlightProjects} />
+      <Highlights client:visible={{ rootMargin: '350px' }} projects={highlightProjects} />
     </div>
   </section>
 
   <section id="projects" class="universe-section section-grid" aria-labelledby="universe-title">
     <div class="shell">
       <div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>03</span> The product universe</p><h2 id="universe-title">See the<br /><em>build surface.</em></h2></div><p>Switch the lens. Explore how the same product thinking moves between mobile, web, AI and the open archive.</p></div>
-      <ProductUniverse client:load projects={projects} />
+      <ProductUniverse client:visible={{ rootMargin: '450px' }} projects={projects} />
     </div>
   </section>
 
@@ -45,11 +45,11 @@ const aiProjects = projects.filter((project) => project.filters.includes('ai'));
   </section>
 
   <section id="about" class="about-section section-grid" aria-labelledby="about-title">
-    <div class="shell about-grid"><div class="about-statement reveal-on-scroll"><p class="eyebrow"><span>07</span> Aman Labs</p><h2 id="about-title">Where unfinished<br /><em>ideas get tested.</em></h2></div><div class="about-copy reveal-on-scroll"><p class="large-copy">I’m a product-minded developer who enjoys taking ambiguous ideas and giving them a useful shape — a trustworthy flow, a considered detail, a real shipped surface.</p><div class="principles"><div><span>01</span><strong>Performance by default.</strong><p>Make the important surface arrive first.</p></div><div><span>02</span><strong>Privacy-conscious products.</strong><p>Keep sensitive work local and boundaries clear.</p></div><div><span>03</span><strong>Evidence over claims.</strong><p>Let the repository and product state speak.</p></div></div></div></div>
+    <div class="shell about-grid"><div class="about-statement reveal-on-scroll"><p class="eyebrow"><span>07</span> Product development / talent acquisition</p><h2 id="about-title">Build useful things.<br /><em>Bring people in.</em></h2></div><div class="about-copy reveal-on-scroll"><p class="large-copy">I build independent Android, web and AI products — and bring 7+ years of technical talent experience across IT, federal and healthcare work.</p><p class="about-context">LinkedIn-listed: Agama Solutions Inc. · Top Performer recognition (2021, 2022, 2024) · Technical Recruitment Certification (2022) · LinkedIn Recruiter Assessment (2025).</p><div class="principles"><div><span>01 / PRODUCTS</span><strong>From brief to working surface.</strong><p>Android apps, public web tools and AI-assisted workflows.</p></div><div><span>02 / PEOPLE</span><strong>Technical talent acquisition.</strong><p>IT, federal and healthcare recruiting experience.</p></div><div><span>03 / PRACTICE</span><strong>Evidence before claims.</strong><p>Clear product status, honest boundaries and traceable work.</p></div></div></div></div>
   </section>
 
   <section id="comparison" class="archive-section section-grid" aria-labelledby="comparison-title">
-    <div class="shell"><div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>08</span> Explore all projects</p><h2 id="comparison-title">The complete<br /><em>build record.</em></h2></div><p>Search the evidence-backed archive by category, stack or status. Public links stay public; private work stays intentionally high-level.</p></div><ProjectExplorer client:load /><div class="archive-link-row"><a class="arrow-link" href="/projects/">Open the full archive <span>↗</span></a><span>{projects.length.toString().padStart(2, '0')} documented projects</span></div></div>
+    <div class="shell"><div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>08</span> Explore all projects</p><h2 id="comparison-title">The complete<br /><em>build record.</em></h2></div><p>Search the evidence-backed archive by category, stack or status. Public links stay public; private work stays intentionally high-level.</p></div><ProjectExplorer client:visible={{ rootMargin: '450px' }} /><div class="archive-link-row"><a class="arrow-link" href="/projects/">Open the full archive <span>↗</span></a><span>{projects.length.toString().padStart(2, '0')} documented projects</span></div></div>
   </section>
 
   <section id="contact" class="contact-section section-grid" aria-labelledby="contact-title">

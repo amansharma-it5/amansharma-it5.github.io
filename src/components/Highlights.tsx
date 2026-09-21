@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProjectVisual from './ProjectVisual';
 import type { Project } from '../data/projects';
 
 export default function Highlights({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const current = projects[active];
   const move = (direction: number) => setActive((index) => (index + direction + projects.length) % projects.length);
+
+  useEffect(() => setHydrated(true), []);
 
   if (!current) return null;
   return (
@@ -14,7 +18,24 @@ export default function Highlights({ projects }: { projects: Project[] }) {
       role="region"
       aria-roledescription="carousel"
       aria-label="Selected project highlights"
+      data-hydrated={hydrated}
       tabIndex={0}
+      onTouchStart={(event) => {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.closest('a, button, input, textarea, select')) return;
+        const touch = event.touches[0];
+        if (touch) touchStart.current = { x: touch.clientX, y: touch.clientY };
+      }}
+      onTouchEnd={(event) => {
+        const start = touchStart.current;
+        touchStart.current = null;
+        const touch = event.changedTouches[0];
+        if (!start || !touch) return;
+        const dx = touch.clientX - start.x;
+        const dy = touch.clientY - start.y;
+        if (Math.abs(dx) > 52 && Math.abs(dx) > Math.abs(dy) * 1.2) move(dx < 0 ? 1 : -1);
+      }}
+      onTouchCancel={() => { touchStart.current = null; }}
       onKeyDown={(event) => {
         const target = event.target;
         if (!(target instanceof HTMLElement) || target.closest('a, button, input, textarea, select, [contenteditable="true"]')) return;
@@ -28,6 +49,7 @@ export default function Highlights({ projects }: { projects: Project[] }) {
         }
       }}
     >
+      <p className="sr-only" aria-live="polite">Highlight {active + 1} of {projects.length}: {current.name}, {current.status}</p>
       <div className="highlights-stage">
         <div className="highlights-stage__visual"><ProjectVisual project={current} large /><span className="highlights-stage__index">{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span></div>
         <div className="highlights-stage__copy">

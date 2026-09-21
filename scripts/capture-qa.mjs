@@ -17,10 +17,14 @@ const homeSections = [
   ['hero-end', 0.95],
   ['highlights', '#highlights'],
   ['product-universe', '#projects'],
+  ['3d-showroom', '.universe-showroom'],
+  ['apps', '#apps'],
+  ['web', '#web'],
+  ['ai', '#ai'],
   ['archive', '#comparison'],
   ['contact', '#contact']
 ];
-const caseStudies = ['civicproof', 'divyadhun'];
+const caseStudies = ['civicproof', 'divyadhun', 'watchroom'];
 
 function safeName(value) {
   return value.replace(/[^a-z0-9-]+/gi, '-').replace(/^-|-$/g, '').toLowerCase();
@@ -30,9 +34,16 @@ async function capture(page, file, scrollTo) {
   if (typeof scrollTo === 'number') {
     await page.evaluate((ratio) => {
       const hero = document.querySelector('.cinematic-hero');
-      const range = hero ? Math.max(0, hero.scrollHeight - window.innerHeight) : document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({ top: Math.round(range * ratio), behavior: 'instant' });
+      const heroTop = hero ? hero.getBoundingClientRect().top + window.scrollY : 0;
+      const maximumHeroScroll = hero ? Math.max(0, heroTop + hero.offsetHeight - window.innerHeight) : document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: Math.round(maximumHeroScroll * ratio), behavior: 'instant' });
     }, scrollTo);
+    const compact = (page.viewportSize()?.width ?? 0) <= 620;
+    const surface = compact || scrollTo < 0.25 ? '.hero-surface--one img' : scrollTo < 0.52 ? '.hero-surface--two img' : '.hero-surface--three img';
+    await page.waitForFunction((selector) => {
+      const image = document.querySelector(selector);
+      return image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0;
+    }, surface, { timeout: 15_000 });
   } else {
     await page.evaluate((id) => {
       const element = document.querySelector(id);
@@ -40,9 +51,12 @@ async function capture(page, file, scrollTo) {
       const top = element.getBoundingClientRect().top + window.scrollY - 82;
       window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
     }, scrollTo);
+    if (scrollTo === '.universe-showroom' && (page.viewportSize()?.width ?? 0) > 900) {
+      await page.waitForSelector('.universe-showroom .scene-runtime--showroom canvas', { timeout: 30_000 });
+    }
   }
-  await page.waitForTimeout(180);
-  await page.screenshot({ path: file, animations: 'disabled' });
+  await page.waitForTimeout(320);
+  await page.screenshot({ path: file, type: 'jpeg', quality: 91, animations: 'disabled' });
 }
 
 await mkdir(outputDir, { recursive: true });
@@ -53,14 +67,15 @@ for (const viewport of viewports) {
   const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'no-preference' });
   await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
   for (const [name, scrollTo] of homeSections) {
-    const file = join(outputDir, `${viewport.name}-${name}.png`);
+    if (name === '3d-showroom' && viewport.width <= 900) continue;
+    const file = join(outputDir, `${viewport.name}-${name}.jpg`);
     await capture(page, file, scrollTo);
     evidence.push({ file, viewport: viewport.name, route: '/', capture: name });
   }
   for (const slug of caseStudies) {
     await page.goto(`${baseUrl}/projects/${slug}/`, { waitUntil: 'networkidle' });
-    const file = join(outputDir, `${viewport.name}-case-${slug}.png`);
-    await page.screenshot({ path: file, animations: 'disabled' });
+    const file = join(outputDir, `${viewport.name}-case-${slug}.jpg`);
+    await page.screenshot({ path: file, type: 'jpeg', quality: 91, animations: 'disabled' });
     evidence.push({ file, viewport: viewport.name, route: `/projects/${slug}/`, capture: 'case-study-start' });
   }
   await page.close();

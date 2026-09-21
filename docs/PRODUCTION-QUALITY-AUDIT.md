@@ -67,3 +67,18 @@ Verified on the release branch against the generated static preview:
 The build continues to report one minified WebGL chunk above its 500 kB raw-size advisory threshold (852,749 bytes on disk). It is dynamically loaded, not in the initial HTML, and measured at 224,070 encoded bytes in Chromium; the enforced JavaScript transfer budget passes. Keep monitoring this chunk if more 3D features are added.
 
 Production has not been replaced during this audit. The remaining release actions are branch review/merge and then verifying that GitHub Pages serves the new release. Organization-specific Agilocity Staffing/Vanshara facts remain excluded until verifiable source material is available.
+
+## Final premium upgrade — release-candidate verification
+
+Date: 2026-09-21. Work is on `feat/final-premium-product-upgrade`, based on `07d779711779f581b88f9d7ddd36a0e1099d8d30`; production is intentionally unchanged until CI passes and the approved merge/deploy flow completes.
+
+This pass replaces the prior verification snapshot above; the older section is retained as the historical baseline. The release candidate adds the original scroll-led portfolio direction, responsive WebP media, motion-tied product stories, deferred below-fold islands, keyboard-accessible interactions and the static low-resource fallback. The hero's heavy WebGL scene now starts after a real user intent (pointer, scroll, wheel, touch or keyboard) so the initial content can remain responsive; the CSS monogram is visible before that enhancement loads.
+
+### Validation results
+
+- `npm run check`: 21 files, 0 errors, 0 warnings, 0 hints. `npm run build`: 11 static routes; Vite still emits its raw-size advisory for the lazy 3D chunk (the initial-transfer gate remains clear). `npm test`: 11 HTML routes and 17 required outputs. `npm audit --audit-level=high`: 0 vulnerabilities.
+- `npm run test:browser -- --workers=1` and `--workers=2`: **17/17 passed** in both configurations after the final WebGL behavior change; the 2-worker setting matches the GitHub Actions default. The suite covers navigation, keyboard/touch interactions, search and filters, stories, responsive overflow, image/link health, reduced motion, low-memory mode, deferred WebGL, performance budgets and axe WCAG A/AA across all routes. Axe reported 0 violations.
+- Production-preview transfer audit (unthrottled Chromium): mobile initial view FCP/LCP 180/528 ms, CLS 0, JavaScript 65,934 B, images 10,770 B, same-origin total 92,274 B; desktop FCP/LCP 424/720 ms, CLS 0, JavaScript 65,934 B, images 20,372 B, same-origin total 101,876 B. Neither initial view downloads WebGL.
+- Lighthouse 13 lab results: mobile Performance 91, Accessibility 100, Best Practices 100, SEO 100 (FCP/LCP 2.6 s, TBT 0 ms, CLS 0.002); desktop Performance 97, Accessibility 100, Best Practices 100, SEO 100 (FCP/LCP 0.8 s, TBT 0 ms, CLS 0.008). These are simulated lab results, not field-user metrics. Both JSON reports were successfully written. On Windows, Lighthouse CLI exited 1 during temporary Chrome-profile cleanup (`EPERM`) after writing each complete report; this is recorded rather than called a clean CLI exit.
+- The 54 viewport/checkpoint screenshots in `artifacts/qa/final-premium-release-2026-09-21/` were visually reviewed. Public project captures are authentic. Private CivicProof screenshots remain outside this repository and deployment until each exact image is approved.
+- Production-release status: pending CI, reviewed merge and GitHub Pages workflow verification. The existing production URL remains unchanged until those release gates complete.
