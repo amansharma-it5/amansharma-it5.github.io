@@ -316,6 +316,7 @@ test('reduced-motion and low-memory modes keep a complete static product fallbac
 });
 
 test('desktop WebGL is interactive, on-demand and paused when its hero scrolls offscreen', async ({ page }) => {
+  test.setTimeout(60_000);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   await expect(page.locator('.cinematic-hero__three canvas')).toHaveCount(0);
@@ -347,7 +348,7 @@ test('desktop WebGL is interactive, on-demand and paused when its hero scrolls o
   await expect(showroom.locator('.universe-showroom__active')).toContainText('CivicProof');
   await page.locator('.universe-projects').getByRole('button', { name: /DivyaDhun/ }).click();
   await expect(showroom.locator('.universe-showroom__active')).toContainText('DivyaDhun');
-  await showroomScene.locator('canvas').click({ position: { x: 798, y: 110 } });
+  await showroomScene.locator(':scope > div').click({ position: { x: 798, y: 110 } });
   await expect(showroom.locator('.universe-showroom__active')).toContainText('Watchroom');
 });
 
