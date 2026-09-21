@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProjectVisual from './ProjectVisual';
 import type { Project } from '../data/projects';
 
@@ -7,18 +7,27 @@ export default function Highlights({ projects }: { projects: Project[] }) {
   const current = projects[active];
   const move = (direction: number) => setActive((index) => (index + direction + projects.length) % projects.length);
 
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') move(1);
-      if (event.key === 'ArrowLeft') move(-1);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [projects.length]);
-
   if (!current) return null;
   return (
-    <div className="highlights-viewer" role="region" aria-roledescription="carousel" aria-label="Selected project highlights">
+    <div
+      className="highlights-viewer"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Selected project highlights"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement) || target.closest('a, button, input, textarea, select, [contenteditable="true"]')) return;
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          move(1);
+        }
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          move(-1);
+        }
+      }}
+    >
       <div className="highlights-stage">
         <div className="highlights-stage__visual"><ProjectVisual project={current} large /><span className="highlights-stage__index">{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span></div>
         <div className="highlights-stage__copy">

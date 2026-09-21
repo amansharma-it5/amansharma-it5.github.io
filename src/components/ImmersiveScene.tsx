@@ -33,7 +33,7 @@ const finishPalette: Record<SceneFinish, { body: string; accent: string; base: s
 
 function Sculpture({ mode, finish }: { mode: SceneMode; finish: SceneFinish }) {
   const root = useRef<THREE.Group>(null);
-  const shard = useRef<THREE.Mesh>(null);
+  const orbit = useRef<THREE.Group>(null);
   const { camera } = useThree();
   const pointer = useRef({ x: 0, y: 0 });
   const palette = finishPalette[finish];
@@ -53,10 +53,7 @@ function Sculpture({ mode, finish }: { mode: SceneMode; finish: SceneFinish }) {
     root.current.rotation.x = THREE.MathUtils.lerp(root.current.rotation.x, pointer.current.y * -0.16, 0.045);
     root.current.position.x = THREE.MathUtils.lerp(root.current.position.x, pointer.current.x * 0.16, 0.045);
     root.current.position.y = THREE.MathUtils.lerp(root.current.position.y, 0, 0.045);
-    if (shard.current) {
-      shard.current.rotation.x = THREE.MathUtils.lerp(shard.current.rotation.x, 0.8 + pointer.current.y * 0.08, 0.04);
-      shard.current.rotation.z = THREE.MathUtils.lerp(shard.current.rotation.z, 0.4 + pointer.current.x * 0.12, 0.04);
-    }
+    if (orbit.current) orbit.current.rotation.y = THREE.MathUtils.lerp(orbit.current.rotation.y, pointer.current.x * 0.16, 0.035);
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointer.current.x * (mode === 'hero' ? 0.32 : 0.16), 0.025);
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, pointer.current.y * -0.12 + (mode === 'hero' ? 0.05 : 0.4), 0.025);
     camera.lookAt(0, mode === 'hero' ? 0.05 : 0.5, 0);
@@ -64,29 +61,55 @@ function Sculpture({ mode, finish }: { mode: SceneMode; finish: SceneFinish }) {
 
   return (
     <group ref={root} scale={mode === 'hero' ? 1.05 : 0.78}>
-      <mesh castShadow>
-        <icosahedronGeometry args={[1.02, 3]} />
-        <meshPhysicalMaterial color={palette.body} metalness={0.72} roughness={0.24} clearcoat={0.35} clearcoatRoughness={0.2} wireframe={false} />
+      <mesh position={[0, 0.04, 0]} castShadow>
+        <boxGeometry args={[1.22, 1.72, 0.34]} />
+        <meshPhysicalMaterial color={palette.body} metalness={0.76} roughness={0.25} clearcoat={0.62} clearcoatRoughness={0.2} />
       </mesh>
-      <mesh ref={shard} rotation={[0.8, 0.2, 0.4]} castShadow>
-        <torusKnotGeometry args={[0.78, 0.075, 160, 18, 2, 3]} />
-        <meshPhysicalMaterial color={palette.accent} metalness={0.8} roughness={0.18} clearcoat={0.6} clearcoatRoughness={0.16} />
+      <mesh position={[0, 0.04, 0.18]}>
+        <boxGeometry args={[1.02, 1.5, 0.035]} />
+        <meshStandardMaterial color={palette.base} metalness={0.58} roughness={0.38} />
       </mesh>
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.42, 0.012, 12, 96]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={0.28} />
+      <mesh position={[0, 0.57, 0.205]}>
+        <boxGeometry args={[0.68, 0.035, 0.018]} />
+        <meshBasicMaterial color={palette.accent} />
       </mesh>
-      <mesh rotation={[0.2, 0.4, Math.PI / 3]}>
-        <torusGeometry args={[1.67, 0.009, 10, 96]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={0.17} />
+      <mesh position={[0, 0.36, 0.207]}>
+        <boxGeometry args={[0.68, 0.018, 0.018]} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={0.6} />
       </mesh>
-      <mesh position={[0.1, -1.12, 0]} rotation={[0.2, 0.2, 0]}>
-        <cylinderGeometry args={[0.62, 0.82, 0.12, 8]} />
+      <mesh position={[0, -0.43, 0.208]}>
+        <boxGeometry args={[0.68, 0.018, 0.018]} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={0.36} />
+      </mesh>
+      <group ref={orbit}>
+        <mesh position={[-0.86, 0.68, 0]} rotation={[0.18, 0.28, 0.2]}>
+          <octahedronGeometry args={[0.17, 0]} />
+          <meshPhysicalMaterial color={palette.accent} metalness={0.7} roughness={0.2} />
+        </mesh>
+        <mesh position={[0.84, 0.04, 0.1]} rotation={[0.1, 0.3, 0.5]}>
+          <octahedronGeometry args={[0.13, 0]} />
+          <meshPhysicalMaterial color="#d6d1c5" metalness={0.65} roughness={0.25} />
+        </mesh>
+        <mesh position={[-0.67, -0.82, 0.12]} rotation={[0.4, 0.2, 0.3]}>
+          <octahedronGeometry args={[0.1, 0]} />
+          <meshPhysicalMaterial color={palette.accent} metalness={0.72} roughness={0.22} />
+        </mesh>
+        <mesh rotation={[Math.PI / 2.4, 0.1, -0.24]} scale={[1.14, 0.88, 0.62]}>
+          <torusGeometry args={[1.18, 0.012, 8, 96]} />
+          <meshBasicMaterial color={palette.accent} transparent opacity={0.28} />
+        </mesh>
+        <mesh rotation={[0.3, 0.55, Math.PI / 2.5]} scale={[0.94, 1.16, 0.72]}>
+          <torusGeometry args={[1.42, 0.008, 8, 96]} />
+          <meshBasicMaterial color="#e8e3d8" transparent opacity={0.14} />
+        </mesh>
+      </group>
+      <mesh position={[0, -1.02, 0]} rotation={[0.12, 0.18, 0]}>
+        <cylinderGeometry args={[0.58, 0.72, 0.12, 48]} />
         <meshStandardMaterial color={palette.base} metalness={0.88} roughness={0.28} />
       </mesh>
-      <mesh position={[0, -1.2, 0]}>
-        <torusGeometry args={[0.55, 0.025, 8, 48]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={0.62} />
+      <mesh position={[0, -1.09, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.49, 0.018, 8, 48]} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={0.58} />
       </mesh>
     </group>
   );
