@@ -16,10 +16,13 @@ export default defineConfig({
       use: {
         browserName: 'firefox',
         launchOptions: {
+          env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: '1', MOZ_WEBRENDER: '1' },
           firefoxUserPrefs: {
             'webgl.disabled': false,
             'webgl.force-enabled': true,
-            'webgl.disable-fail-if-major-performance-caveat': true
+            'webgl.disable-fail-if-major-performance-caveat': true,
+            'gfx.webrender.all': true,
+            'gfx.webrender.software': true
           }
         }
       }
