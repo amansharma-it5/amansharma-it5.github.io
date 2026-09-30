@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CinematicHero from '../components/CinematicHero';
 import Highlights from '../components/Highlights';
-import LocalNav from '../components/LocalNav';
+import LocalNav from '../components/LocalNav.astro';
 import ProductUniverse from '../components/ProductUniverse';
 import ProjectExplorer from '../components/ProjectExplorer';
 import { projects } from '../data/projects';
@@ -15,33 +15,33 @@ const webProjects = projects.filter((project) => project.filters.includes('websi
 const aiProjects = projects.filter((project) => project.filters.includes('ai'));
 ---
 <BaseLayout>
-  <LocalNav client:load />
+  <LocalNav />
   <CinematicHero client:media="(min-width: 621px)" projects={highlightProjects} />
 
   <section id="highlights" class="highlights-section section-grid" aria-labelledby="highlights-title">
     <div class="shell">
-      <div class="editorial-heading reveal-on-scroll"><p class="eyebrow"><span>02</span> Selected work</p><h2 id="highlights-title">Get the<br /><em>highlights.</em></h2><p>Six products. Six different constraints. One practice built around making the signal useful.</p></div>
-      <Highlights client:visible={{ rootMargin: '350px' }} projects={highlightProjects} />
+      <div class="editorial-heading reveal-on-scroll"><p class="eyebrow"><span>02</span> First contacts / selected work</p><h2 id="highlights-title">Find the<br /><em>signal.</em></h2><p>Move through six verified builds. Each one is a different answer to the same question: what deserves to exist?</p></div>
+      <Highlights client:visible projects={highlightProjects} />
     </div>
   </section>
 
   <section id="projects" class="universe-section section-grid" aria-labelledby="universe-title">
     <div class="shell">
-      <div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>03</span> The product universe</p><h2 id="universe-title">See the<br /><em>build surface.</em></h2></div><p>Switch the lens. Explore how the same product thinking moves between mobile, web, AI and the open archive.</p></div>
-      <ProductUniverse client:visible={{ rootMargin: '450px' }} projects={projects} />
+      <div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>03</span> The Aman archive / constellation</p><h2 id="universe-title">Navigate the<br /><em>build system.</em></h2></div><p>Switch the lens. A node is a project; a line is a documented relationship. Select one to move from distance into evidence.</p></div>
+      <ProductUniverse client:visible projects={projects} />
     </div>
   </section>
 
   <section id="apps" class="discipline-section discipline-section--apps section-grid" aria-labelledby="apps-title">
-    <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>04</span> Apps</p><h2 id="apps-title">Ideas you can<br /><em>actually use.</em></h2><p>Mobile work is where constraints become tactile: offline states, playback ownership, room lifecycle and the small decisions people feel in the hand.</p></div><div class="discipline-list reveal-on-scroll">{appProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
+      <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>04</span> Domain / Android</p><h2 id="apps-title">Systems you can<br /><em>hold in your hand.</em></h2><p>Offline states, playback ownership, room lifecycle and the decisions people feel in a physical device.</p></div><div class="discipline-list reveal-on-scroll">{appProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
   </section>
 
   <section id="web" class="discipline-section discipline-section--web section-grid" aria-labelledby="web-title">
-    <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>05</span> Web</p><h2 id="web-title">Built beyond<br /><em>the landing page.</em></h2><p>Public surfaces earn trust through clear states, honest boundaries and the small details between a first click and a useful outcome.</p></div><div class="discipline-list reveal-on-scroll">{webProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
+      <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>05</span> Domain / public web</p><h2 id="web-title">Surfaces that<br /><em>earn attention.</em></h2><p>Public products earn trust through clear states, honest boundaries and the small details between a first click and a useful outcome.</p></div><div class="discipline-list reveal-on-scroll">{webProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
   </section>
 
   <section id="ai" class="discipline-section discipline-section--ai section-grid" aria-labelledby="ai-title">
-    <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>06</span> AI / automation</p><h2 id="ai-title">Less repetition.<br /><em>More leverage.</em></h2><p>Automation should explain itself. RecruitOS AI keeps analysis local-first, suggestions reviewable and the user in control of the final edit.</p></div><div class="discipline-list reveal-on-scroll">{aiProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
+      <div class="shell discipline-layout"><div class="discipline-copy reveal-on-scroll"><p class="eyebrow"><span>06</span> Domain / AI + automation</p><h2 id="ai-title">Less repetition.<br /><em>More agency.</em></h2><p>Automation should explain itself. RecruitOS AI keeps analysis local-first, suggestions reviewable and the user in control of the final edit.</p></div><div class="discipline-list reveal-on-scroll">{aiProjects.map((project, index) => <a href={`/projects/${project.slug}/`} class="discipline-row"><span>{String(index + 1).padStart(2, '0')}</span><strong>{project.name}</strong><small>{project.status}</small><i>↗</i></a>)}</div></div>
   </section>
 
   <section id="about" class="about-section section-grid" aria-labelledby="about-title">
@@ -49,7 +49,7 @@ const aiProjects = projects.filter((project) => project.filters.includes('ai'));
   </section>
 
   <section id="comparison" class="archive-section section-grid" aria-labelledby="comparison-title">
-    <div class="shell"><div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>08</span> Explore all projects</p><h2 id="comparison-title">The complete<br /><em>build record.</em></h2></div><p>Search the evidence-backed archive by category, stack or status. Public links stay public; private work stays intentionally high-level.</p></div><ProjectExplorer client:visible={{ rootMargin: '450px' }} /><div class="archive-link-row"><a class="arrow-link" href="/projects/">Open the full archive <span>↗</span></a><span>{projects.length.toString().padStart(2, '0')} documented projects</span></div></div>
+    <div class="shell"><div class="editorial-heading editorial-heading--split reveal-on-scroll"><div><p class="eyebrow"><span>08</span> Explore all projects</p><h2 id="comparison-title">The complete<br /><em>build record.</em></h2></div><p>Search the evidence-backed archive by category, stack or status. Public links stay public; private work stays intentionally high-level.</p></div><ProjectExplorer client:visible /><div class="archive-link-row"><a class="arrow-link" href="/projects/">Open the full archive <span>↗</span></a><span>{projects.length.toString().padStart(2, '0')} documented projects</span></div></div>
   </section>
 
   <section id="contact" class="contact-section section-grid" aria-labelledby="contact-title">

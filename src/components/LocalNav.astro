@@ -1,0 +1,80 @@
+---
+const sectionLinks = [
+  ['overview', 'Overview'],
+  ['highlights', 'Highlights'],
+  ['projects', 'Projects'],
+  ['apps', 'Apps'],
+  ['web', 'Web'],
+  ['ai', 'AI / Automation'],
+  ['about', 'About'],
+  ['comparison', 'Archive'],
+  ['contact', 'Contact'],
+] as const;
+---
+<nav class="local-nav" aria-label="Portfolio sections" data-hydrated="false">
+  <div class="shell local-nav__inner">
+    <a class="local-nav__identity" href="#overview">Aman Sharma <span>Portfolio / 2026</span></a>
+    <button class="local-nav__toggle" type="button" aria-controls="local-nav-links" aria-expanded="false"><span>Sections</span><i /></button>
+    <div class="local-nav__links" id="local-nav-links">
+      {sectionLinks.map(([id, label]) => <a href={`#${id}`} aria-current={id === 'overview' ? 'location' : undefined}>{label}</a>)}
+      <a class="local-nav__archive" href="/projects/">Full archive</a>
+    </div>
+  </div>
+</nav>
+<script>
+  const nav = document.querySelector<HTMLElement>('.local-nav');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.local-nav__toggle');
+  const links = nav?.querySelector<HTMLElement>('.local-nav__links');
+  const sectionIds = ['overview', 'highlights', 'projects', 'apps', 'web', 'ai', 'about', 'comparison', 'contact'];
+  let frame = 0;
+
+  const updateActive = () => {
+    frame = 0;
+    if (!nav) return;
+    const marker = Math.max(120, window.innerHeight * 0.34);
+    let active = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.getElementById(id);
+      if (section && section.getBoundingClientRect().top <= marker) active = id;
+    }
+    nav.querySelectorAll<HTMLAnchorElement>('.local-nav__links a[href^="#"]').forEach((link) => {
+      if (link.getAttribute('href') === `#${active}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const scheduleActive = () => { if (!frame) frame = requestAnimationFrame(updateActive); };
+  const close = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    links?.classList.remove('is-open');
+    nav?.classList.remove('is-open');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    links?.classList.toggle('is-open', !open);
+    nav?.classList.toggle('is-open', !open);
+  });
+  links?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    const href = link.getAttribute('href');
+    if (href?.startsWith('#')) {
+      nav?.querySelectorAll<HTMLAnchorElement>('.local-nav__links a[href^="#"]').forEach((item) => {
+        if (item === link) item.setAttribute('aria-current', 'location');
+        else item.removeAttribute('aria-current');
+      });
+    }
+    close();
+  }));
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || toggle?.getAttribute('aria-expanded') !== 'true') return;
+    close();
+    toggle?.focus();
+  });
+  window.addEventListener('scroll', scheduleActive, { passive: true });
+  window.addEventListener('resize', scheduleActive, { passive: true });
+  // The homepage always opens at Overview. Avoid forcing a full-document
+  // geometry pass during startup; recalculate after intentional scrolling or
+  // when a deep-link hash explicitly requests a section.
+  if (window.location.hash) requestAnimationFrame(updateActive);
+  nav?.setAttribute('data-hydrated', 'true');
+</script>

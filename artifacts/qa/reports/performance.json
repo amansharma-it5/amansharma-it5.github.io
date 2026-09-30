@@ -1,6 +1,6 @@
 {
-  "baseUrl": "http://127.0.0.1:4332",
-  "generatedAt": "2026-09-21T15:08:30.696Z",
+  "baseUrl": "http://127.0.0.1:4321",
+  "generatedAt": "2026-09-30T21:56:35.531Z",
   "thresholds": {
     "firstContentfulPaintMs": 4000,
     "sameOriginJavaScriptEncodedBytes": 550000,
@@ -13,48 +13,15 @@
         "width": 390,
         "height": 844
       },
-      "domContentLoadedMs": 491,
-      "loadEventMs": 499,
-      "firstContentfulPaintMs": 180,
-      "largestContentfulPaintMs": 528,
+      "domContentLoadedMs": 64,
+      "loadEventMs": 212,
+      "firstContentfulPaintMs": 248,
+      "largestContentfulPaintMs": 248,
       "cumulativeLayoutShift": 0,
-      "sameOriginTransferBytes": 92274,
-      "sameOriginJavaScriptEncodedBytes": 65934,
+      "sameOriginTransferBytes": 26836,
+      "sameOriginJavaScriptEncodedBytes": 0,
       "sameOriginImageEncodedBytes": 10770,
-      "scriptResources": [
-        {
-          "url": "/_astro/LocalNav.DwLAFxTX.js",
-          "encodedBytes": 914
-        },
-        {
-          "url": "/_astro/client.D6kQc5Yq.js",
-          "encodedBytes": 56108
-        },
-        {
-          "url": "/_astro/CinematicHero.CG-yE2hc.js",
-          "encodedBytes": 2234
-        },
-        {
-          "url": "/_astro/ScrollDirector.BvVCrTx4.js",
-          "encodedBytes": 792
-        },
-        {
-          "url": "/_astro/react.B8UeIEJK.js",
-          "encodedBytes": 3161
-        },
-        {
-          "url": "/_astro/jsx-runtime.EX16I538.js",
-          "encodedBytes": 424
-        },
-        {
-          "url": "/_astro/preload-helper.B3nfOi5I.js",
-          "encodedBytes": 742
-        },
-        {
-          "url": "/_astro/scheduler.Q7oJyEkR.js",
-          "encodedBytes": 1559
-        }
-      ],
+      "scriptResources": [],
       "webglCanvasCount": 0,
       "fallbackCount": 0,
       "staticMonogramFallbackCount": 1,
@@ -66,30 +33,22 @@
         "width": 1440,
         "height": 900
       },
-      "domContentLoadedMs": 616,
-      "loadEventMs": 619,
-      "firstContentfulPaintMs": 424,
-      "largestContentfulPaintMs": 720,
+      "domContentLoadedMs": 245,
+      "loadEventMs": 420,
+      "firstContentfulPaintMs": 436,
+      "largestContentfulPaintMs": 436,
       "cumulativeLayoutShift": 0,
-      "sameOriginTransferBytes": 101876,
-      "sameOriginJavaScriptEncodedBytes": 65934,
+      "sameOriginTransferBytes": 102593,
+      "sameOriginJavaScriptEncodedBytes": 64355,
       "sameOriginImageEncodedBytes": 20372,
       "scriptResources": [
         {
-          "url": "/_astro/LocalNav.DwLAFxTX.js",
-          "encodedBytes": 914
+          "url": "/_astro/CinematicHero.BEMbhB_o.js",
+          "encodedBytes": 2361
         },
         {
           "url": "/_astro/client.D6kQc5Yq.js",
           "encodedBytes": 56108
-        },
-        {
-          "url": "/_astro/CinematicHero.CG-yE2hc.js",
-          "encodedBytes": 2234
-        },
-        {
-          "url": "/_astro/ScrollDirector.BvVCrTx4.js",
-          "encodedBytes": 792
         },
         {
           "url": "/_astro/react.B8UeIEJK.js",

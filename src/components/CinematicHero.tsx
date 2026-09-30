@@ -93,7 +93,15 @@ export default function CinematicHero({ projects }: { projects: Project[] }) {
       <div className="cinematic-hero__sticky">
         <div className="cinematic-hero__stage" aria-hidden="true">
           <div className="cinematic-hero__light" style={{ opacity: Math.min(0.7, progress * 1.5) }} />
-          <div className={`cinematic-hero__mark${HeroScene ? ' is-webgl' : ''}`}><span>AS</span><i /></div>
+          <div className={`cinematic-hero__mark${HeroScene ? ' is-webgl' : ''}`} aria-hidden="true">
+            <span>AS</span>
+            <i />
+            <b data-domain="android">ANDROID</b>
+            <b data-domain="web">WEB</b>
+            <b data-domain="ai">AI</b>
+            <b data-domain="systems">SYSTEMS</b>
+            <b data-domain="experiments">EXPERIMENTS</b>
+          </div>
           <div className="cinematic-hero__three">{HeroScene && <HeroScene mode="hero" progress={progress} />}</div>
           {first && <ProjectSurface project={first} className="hero-surface--one" progress={progress} start={0} peak={0.05} fadeStart={0.24} end={0.40} initial={0.92} />}
           {second && <ProjectSurface project={second} className="hero-surface--two" progress={progress} start={0.25} peak={0.38} fadeStart={0.50} end={0.64} />}
@@ -101,14 +109,15 @@ export default function CinematicHero({ projects }: { projects: Project[] }) {
           <div className="hero-composition" style={{ opacity: clamp((progress - 0.68) / 0.25), transform: `translateY(${(1 - clamp((progress - 0.68) / 0.25)) * 30}px) scale(${0.9 + clamp((progress - 0.68) / 0.25) * 0.1})` }}>
             <span>AM / 2026</span><b>PRODUCT<br />UNIVERSE</b><i /><small>{projects.length.toString().padStart(2, '0')} verified builds</small>
           </div>
+          <p className="cinematic-hero__tier"><span>RENDER TIER</span><b>semantic / adaptive / on demand</b></p>
         </div>
         <div className="shell cinematic-hero__copy" style={{ opacity: 1 - clamp((progress - 0.14) / 0.18) * 0.96, transform: `translateY(${-clamp((progress - 0.14) / 0.18) * 22}px)` }}>
-          <p className="eyebrow"><span>01</span> Aman Sharma / product builder & technical talent partner</p>
-          <h1 id="hero-title">I turn ideas<br /><em>into products.</em></h1>
-          <p className="cinematic-hero__lede">Useful digital products, shaped with restraint — from mobile foundations to public web tools.</p>
+          <p className="eyebrow"><span>01</span> Aman Sharma / living product archive</p>
+          <h1 id="hero-title">I build systems<br /><em>that become products.</em></h1>
+          <p className="cinematic-hero__lede">A spatial record of Android foundations, public web tools, automation and the decisions between them.</p>
           <div className="cinematic-hero__progress"><span>Scroll to explore</span><i><b style={{ transform: `scaleX(${Math.max(progress, 0.08)})` }} /></i><strong>{String(Math.round(progress * 100)).padStart(2, '0')}</strong></div>
         </div>
-        <div className="cinematic-hero__footer shell"><span>Independent / India</span><span>Scroll story / 01—04</span><a href="#highlights">Enter the work ↓</a></div>
+        <div className="cinematic-hero__footer shell"><span>Independent / India</span><span>Archive state / discover</span><a href="#highlights">Enter the archive ↓</a></div>
       </div>
     </section>
   );
