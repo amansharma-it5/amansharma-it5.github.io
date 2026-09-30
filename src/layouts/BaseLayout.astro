@@ -29,10 +29,10 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link id="async-web-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" media="print" />
+    <link id="async-web-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" media="(min-width: 621px)" />
     <script is:inline>
       const webFonts = document.getElementById('async-web-fonts');
-      if (webFonts instanceof HTMLLinkElement) webFonts.addEventListener('load', () => { webFonts.media = 'all'; }, { once: true });
+      if (webFonts instanceof HTMLLinkElement && window.matchMedia('(min-width: 621px)').matches) webFonts.addEventListener('load', () => { webFonts.media = 'all'; }, { once: true });
     </script>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" /></noscript>
     <meta property="og:type" content="website" />
@@ -87,22 +87,24 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).toString();
       const renderSignals = {
         reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
         constrained: Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData),
-        lowMemory: Boolean((navigator as Navigator & { deviceMemory?: number }).deviceMemory && ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) <= 2),
-        webgl: Boolean(document.createElement('canvas').getContext('webgl2', { failIfMajorPerformanceCaveat: true }))
+        lowMemory: Boolean((navigator as Navigator & { deviceMemory?: number }).deviceMemory && ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) <= 2)
       };
-      document.documentElement.dataset.renderTier = renderSignals.reducedMotion || renderSignals.constrained || renderSignals.lowMemory ? 'dom' : renderSignals.webgl ? 'webgl' : 'dom';
+      // Keep the first mobile task semantic. The immersive islands perform their own
+      // capability checks when they are intentionally requested; probing WebGL here
+      // used to create a synchronous, expensive context on every mobile visit.
+      document.documentElement.dataset.renderTier = renderSignals.reducedMotion || renderSignals.constrained || renderSignals.lowMemory ? 'dom' : 'adaptive';
       document.documentElement.dataset.webgpu = 'gpu' in navigator ? 'available-for-future-enhancement' : 'unavailable';
 
       const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.reveal-on-scroll'));
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reducedMotion || !('IntersectionObserver' in window)) {
+      const compactViewport = window.matchMedia('(max-width: 620px)').matches;
+      if (reducedMotion || compactViewport || !('IntersectionObserver' in window)) {
         revealItems.forEach((element) => element.classList.add('is-visible'));
       } else {
-        document.documentElement.classList.add('motion-ready');
-        revealItems.forEach((element) => {
-          const rect = element.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) element.classList.add('is-visible');
-        });
+        // Let the first paint settle before enabling the reveal state. Intersection
+        // Observer will handle in-view content without forcing a document-wide
+        // synchronous geometry pass during startup.
+        window.requestAnimationFrame(() => document.documentElement.classList.add('motion-ready'));
         const revealObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;

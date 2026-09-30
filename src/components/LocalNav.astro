@@ -72,6 +72,9 @@ const sectionLinks = [
   });
   window.addEventListener('scroll', scheduleActive, { passive: true });
   window.addEventListener('resize', scheduleActive, { passive: true });
-  updateActive();
+  // The homepage always opens at Overview. Avoid forcing a full-document
+  // geometry pass during startup; recalculate after intentional scrolling or
+  // when a deep-link hash explicitly requests a section.
+  if (window.location.hash) requestAnimationFrame(updateActive);
   nav?.setAttribute('data-hydrated', 'true');
 </script>

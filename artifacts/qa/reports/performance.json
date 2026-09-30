@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://127.0.0.1:4321",
-  "generatedAt": "2026-09-30T15:30:00.344Z",
+  "generatedAt": "2026-09-30T21:56:35.531Z",
   "thresholds": {
     "firstContentfulPaintMs": 4000,
     "sameOriginJavaScriptEncodedBytes": 550000,
@@ -13,12 +13,12 @@
         "width": 390,
         "height": 844
       },
-      "domContentLoadedMs": 170,
-      "loadEventMs": 185,
-      "firstContentfulPaintMs": 196,
-      "largestContentfulPaintMs": 196,
+      "domContentLoadedMs": 64,
+      "loadEventMs": 212,
+      "firstContentfulPaintMs": 248,
+      "largestContentfulPaintMs": 248,
       "cumulativeLayoutShift": 0,
-      "sameOriginTransferBytes": 26832,
+      "sameOriginTransferBytes": 26836,
       "sameOriginJavaScriptEncodedBytes": 0,
       "sameOriginImageEncodedBytes": 10770,
       "scriptResources": [],
@@ -33,12 +33,12 @@
         "width": 1440,
         "height": 900
       },
-      "domContentLoadedMs": 181,
-      "loadEventMs": 184,
-      "firstContentfulPaintMs": 152,
-      "largestContentfulPaintMs": 300,
+      "domContentLoadedMs": 245,
+      "loadEventMs": 420,
+      "firstContentfulPaintMs": 436,
+      "largestContentfulPaintMs": 436,
       "cumulativeLayoutShift": 0,
-      "sameOriginTransferBytes": 102589,
+      "sameOriginTransferBytes": 102593,
       "sameOriginJavaScriptEncodedBytes": 64355,
       "sameOriginImageEncodedBytes": 20372,
       "scriptResources": [

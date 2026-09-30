@@ -194,8 +194,13 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .site-footer a:hover { color: var(--gold); }
 
 @supports (animation-timeline: scroll()) {
-  .cinematic-hero__mark:not(.is-webgl) { animation: archive-mark-drift linear both; animation-timeline: scroll(block); animation-range: 0 38%; }
-  .archive-constellation__field::before { animation: archive-grid-breathe linear both; animation-timeline: view(); animation-range: entry 0% cover 65%; }
+  /* The mobile composition is intentionally still and touch-led. Keeping
+     scroll-linked timelines for wide layouts avoids a full-document layout
+     pass on every mobile scroll frame. */
+  @media (min-width: 621px) {
+    .cinematic-hero__mark:not(.is-webgl) { animation: archive-mark-drift linear both; animation-timeline: scroll(block); animation-range: 0 38%; }
+    .archive-constellation__field::before { animation: archive-grid-breathe linear both; animation-timeline: view(); animation-range: entry 0% cover 65%; }
+  }
 }
 @keyframes archive-mark-drift {
   from { transform: translate3d(0, 0, 0) rotate(2deg) skewY(-2deg); }
