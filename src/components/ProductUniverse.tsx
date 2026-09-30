@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ComponentType } from 'react';
 import ProjectVisual from './ProjectVisual';
+import ArchiveConstellation from './ArchiveConstellation';
 import type { Project } from '../data/projects';
 import type { ImmersiveSceneProps } from './ImmersiveScene';
 
@@ -62,6 +63,7 @@ export default function ProductUniverse({ projects }: { projects: Project[] }) {
           window.requestAnimationFrame(() => document.getElementById(`universe-tab-${next.id}`)?.focus());
         }}>{item.label}</button>)}
       </div>
+      <ArchiveConstellation projects={matches} activeSlug={active.slug} onSelect={(slug) => { setActiveSlug(slug); setActiveStep(0); }} />
       <div className="universe-stage" id="universe-panel" role="tabpanel" aria-labelledby={`universe-tab-${category}`}>
         <div className="universe-stage__visual"><ProjectVisual project={active} large interactive storyIndex={!active.image ? activeStep : undefined} onStorySelect={setActiveStep} /></div>
         <div className="universe-stage__copy"><p className="eyebrow"><span>UNIVERSE / {String(matches.length).padStart(2, '0')}</span> {activeCategory.label}</p><p className="universe-stage__status">{active.status}</p><h3>{active.name}<br /><em>{active.category}</em></h3><p>{active.summary}</p><div className="tag-row">{active.stack.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</div><a className="arrow-link" href={`/projects/${active.slug}/`}>Study this build <span>↗</span></a></div>
