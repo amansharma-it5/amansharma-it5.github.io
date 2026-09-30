@@ -1,8 +1,8 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('../dist/', import.meta.url);
-const rootPath = root.pathname.replace(/^\//, '').replace(/^([A-Z]):/, '$1:');
+const rootPath = fileURLToPath(new URL('../dist/', import.meta.url));
 const required = [
   'index.html',
   '404.html',

@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
           cache: npm
@@ -33,15 +33,31 @@ jobs:
         run: npm run check
       - name: Build static site
         run: npm run build
+      - name: Run static smoke test
+        run: npm test
       - name: Install Chromium, Firefox and WebKit for browser tests
         run: npx playwright install --with-deps chromium firefox webkit
       - name: Prepare virtual display and Mesa software WebGL for Firefox
         run: sudo apt-get install -y xvfb libgl1-mesa-dri
       - name: Test browser behavior and accessibility
         run: xvfb-run -a env LIBGL_ALWAYS_SOFTWARE=1 npm run test:browser
+      - name: Run deterministic performance budgets
+        shell: bash
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4323 > "$RUNNER_TEMP/portfolio-preview.log" 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4323/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4323/ > /dev/null
+          npm run perf
       - name: Upload test reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: portfolio-browser-qa
           path: |
@@ -49,7 +65,7 @@ jobs:
             test-results/
           if-no-files-found: ignore
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./dist
 
@@ -66,4 +82,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

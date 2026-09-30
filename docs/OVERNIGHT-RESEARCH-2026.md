@@ -1,0 +1,38 @@
+# Overnight research — September 2026
+
+This note records the research that informed the overnight quality pass. Sources are official documentation or the referenced studio/portfolio itself. The goal was to preserve the current Aman Archive direction while reducing operational risk and keeping the static fallback authoritative.
+
+## Decisions
+
+| Area | Source | Browser/support signal | Decision | Why |
+| --- | --- | --- | --- | --- |
+| Astro islands | [Astro Islands](https://docs.astro.build/en/concepts/islands/) | Stable Astro architecture; client directives load JavaScript per island | **Keep and reinforce** | The homepage already leaves narrative content as static HTML and defers interactive islands. This is the right architecture for the current payload and accessibility fallback. |
+| React 19 optimization | [React Compiler introduction](https://react.dev/learn/react-compiler/introduction) | Production compiler supports React 19, but adds build and compatibility surface | **Reject for now** | The measured mobile path sends 0 bytes of same-origin JavaScript and the desktop path is already isolated to islands. Compiler adoption would not solve a measured bottleneck. |
+| R3F scene strategy | [R3F performance pitfalls](https://r3f.docs.pmnd.rs/advanced/pitfalls), [R3F scaling](https://github.com/pmndrs/react-three-fiber/blob/master/docs/advanced/scaling-performance.mdx) | Canvas rendering and render-loop cost are device-sensitive | **Keep on-demand loading** | Hero and showroom scenes are requested only on desktop intent/visibility; low-memory, reduced-motion and save-data modes stay DOM-only. |
+| Three.js lifecycle | [Three.js cleanup](https://threejs.org/manual/pages/cleanup.html), [disposing objects](https://threejs.org/manual/pages/how-to-dispose-of-objects.html) | GPU resources are not automatically released | **Audit and preserve cleanup boundary** | Current scenes use short-lived route/visibility ownership and no model loader. Future scene additions must explicitly dispose geometries, materials, textures, render targets and controls. |
+| CSS scroll-driven animation | [Chrome scroll-driven animation guidance](https://developer.chrome.com/docs/css-ui/scroll-driven-animations) | Chromium support is mature; other engines require progressive fallback | **Keep only as enhancement** | Existing CSS timeline effects remain desktop-only. Mobile uses normal document flow because prior profiling showed full-document layout cost on compact screens. |
+| View Transitions | [MDN View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) | Progressive feature with browser/version differences | **Reject for this pass** | The site is a static multi-route archive. Adding transitions now would increase navigation state complexity without a verified user or performance gain. Conventional links remain the reliable path. |
+| Responsive images | [web.dev responsive images](https://web.dev/learn/images/responsive-images) | `srcset`, `sizes` and `<picture>` are broadly supported | **Keep current implementation** | Authenticated public captures already use WebP sources and size hints; the static JPEG remains the truthful fallback. More derivatives would add repository and QA cost without a measured need. |
+| Core Web Vitals | [web.dev Web Vitals](https://web.dev/articles/vitals), [MDN LCP API](https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint) | LCP, CLS and INP are the relevant user-facing signals | **Keep deterministic budgets** | Local budgets cover first paint, JavaScript, image bytes and fallback presence. CI now runs the same performance script after a preview server starts. Lighthouse remains a release investigation tool, not a fabricated gate. |
+| WCAG 2.2 focus | [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/), [W3C Focus Appearance](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance) | WCAG 2.2 is the current W3C recommendation | **Keep current token and focus tests** | The existing `--gold` focus path is covered by Playwright and axe. The two-layer focus approach should remain visible against the dark, image-backed composition. |
+| Playwright QA | [Playwright best practices](https://playwright.dev/docs/best-practices) | User-facing locators and web-first assertions are recommended | **Keep and extend narrowly** | Existing tests use roles, labels and web-first assertions. One extreme-viewport/responsive-transition test was added for the previously untested 320px and 2560px edges. |
+| Pages deployment | [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows) | Build artifact must be uploaded; deploy needs Pages write and OIDC permissions | **Preserve architecture** | Build and deploy remain separate jobs; pull requests build but do not deploy; main-only deploy condition and least-privilege permissions are unchanged. |
+| Actions runtime | [checkout releases](https://github.com/actions/checkout/releases), [setup-node releases](https://github.com/actions/setup-node/releases), [upload-artifact marketplace](https://github.com/marketplace/actions/upload-a-build-artifact), [upload-pages-artifact marketplace](https://github.com/marketplace/actions/upload-github-pages-artifact), [deploy-pages releases](https://github.com/actions/deploy-pages/releases) | Current stable first-party tags support Node 24 | **Adopt** | Workflow actions moved from Node 20-era majors to the researched Node 24-compatible releases and are pinned to their verified commit SHAs with version comments. |
+
+## Portfolio / studio research
+
+- [Bruno Simon](https://bruno-simon.com/) demonstrates the power of a memorable physical interaction, but its own accessible HTML route makes clear why a portfolio needs a readable semantic path in addition to the playful 3D world. Aman Archive keeps the spatial layer optional and the project record directly inspectable.
+- [Lusion Studio](https://www.lusionstudio.com/) and [Lusion](https://lusion.co/) show the value of a restrained visual system, a curated work archive and a clear contact path. The useful principle is considered sequencing, not adding more effects.
+- [Dennis Snellenberg](https://dennissnellenberg.com/work) treats a portfolio as an indexed body of work with filters and concise metadata. Aman Archive keeps its constellation model but retains a linear keyboard and search equivalent.
+- [Valentin Gassend](https://valentingassend.com/) is a relevant example of typography, WebGL and motion working as one identity. The transferable principle is a coherent motion language; the implementation here remains smaller and progressive because the work archive is the product.
+
+## Rejected or deferred ideas
+
+- WebGPU: not adopted. The current scenes are small WebGL enhancements; no measured workload needs compute or a custom WebGPU backend.
+- Global smooth-scroll library: not adopted. Native scrolling plus CSS timelines and local observers are easier to pause, test and make accessible.
+- Analytics or third-party telemetry: not adopted. There is no approved data-collection purpose and GitHub Pages already has hosting-level logging outside this repository.
+- CSP response headers: documented as a hosting limitation rather than faked with an incomplete meta policy. GitHub Pages serves static assets through its platform; the site keeps third-party font loading explicit and avoids adding new remote execution sources.
+
+## Research boundary
+
+This was a repository and public-web research pass. It did not inspect private repositories, private screenshots, browser profiles, credentials or authenticated LinkedIn content.
