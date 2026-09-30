@@ -291,6 +291,25 @@ test('layout avoids horizontal overflow at required widths and on every case rou
   }
 });
 
+test('layout survives extreme viewports and responsive direction changes', async ({ page }) => {
+  for (const viewport of [
+    { width: 320, height: 568 },
+    { width: 2560, height: 1440 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    await expect(page.locator('#hero-title')).toBeVisible();
+    const widths = await page.evaluate(() => ({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth }));
+    expect(widths.content, `horizontal overflow at ${viewport.width}px`).toBeLessThanOrEqual(widths.viewport + 1);
+  }
+
+  await page.setViewportSize({ width: 320, height: 568 });
+  await expect(page.locator('.site-header')).toBeHidden();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.locator('.site-header')).toBeVisible();
+  await expect(page.locator('#hero-title')).toBeVisible();
+});
+
 test('reduced-motion and low-memory modes keep a complete static product fallback', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
